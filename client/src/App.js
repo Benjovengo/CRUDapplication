@@ -10,6 +10,19 @@ function App() {
   const [productName, setProductName] = useState("")
   const [productDescription, setProductDescription] = useState("")
   const [productPrice, setProductPrice] = useState(0)
+  const [productsList, setProductsList] = useState([])
+
+  // Fetch the products from the database when the page loads
+  useEffect(() => {
+    // Address of the backend server
+    const baseURL = "http://localhost:3001"
+    const getURL = "/api/get"
+    // Send a GET request to the backend server to retrieve product data.
+    axios.get(baseURL+getURL).then((response) => {
+      setProductsList(response.data)
+    })
+  }, [])
+  
 
   // Current date in MySQL date format: YYYY-MM-DD
   function getCurrentDate() {
