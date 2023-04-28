@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 // Handle an HTTP POST request to insert information into the database
 // req: represents the request data received from the front-end
 // res: represents the response data to be sent back to the front-end
-app.post("/api/insert", (req, res) =>{
+app.post("/api/insert", (req, res) => {
   // Extract the fields from the request body sent by the front-end
   const productName = req.body.productName // limit: 200 chars
   const productDescription = req.body.productDescription // limit: 500 chars
