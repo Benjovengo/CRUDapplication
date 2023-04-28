@@ -1,0 +1,15 @@
+# Specify filepatterns you want git to ignore.
+
+# npm/node.js directory
+node_modules/
+./node_modules/*
+./client/node_modules/
+./server/node_modules/
+
+# work directory
+work/
+./client/work/
+./server/work/
+
+# hidden definitions
+.env
