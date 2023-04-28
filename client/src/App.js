@@ -11,6 +11,14 @@ function App() {
   const [productDescription, setProductDescription] = useState("")
   const [productPrice, setProductPrice] = useState(0)
 
+  // Current date in MySQL date format
+  function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2); // add leading zero if necessary
+    const day = ('0' + today.getDate()).slice(-2); // add leading zero if necessary
+    return `${year}-${month}-${day}`;
+  }
 
   const addProduct = (event) => {
     // prevent the form from reloading the page when it's submitted
