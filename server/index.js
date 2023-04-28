@@ -2,6 +2,8 @@
 const express = require("express")
 const app = express()
 const mysql = require("mysql")
+const bodyParser = require("body-parser")
+const cors = require("cors")
 
 // Creates a MySQL connection pool using the mysql library.
 //
@@ -19,11 +21,13 @@ const db = mysql.createPool({
   database: "ChallengeDB",
 })
 
-app.get("/", (req, res) => {
-  // DB Query
-  const sqlInsertItem = "INSERT INTO store_products (nome, descricao, preco, data_criacao) VALUES ('Chanel Bag', 'A very expensive leather bag.', 1250.00, '2023-04-28');"
-  db.query(sqlInsertItem, (err, result) => {
-    res.send(result)
+// CORS module to enable communication between the front-end and back-end servers
+app.use(cors())
+// grab the information as a JSON object from the front-end
+app.use(express.json())
+// Body Parser
+app.use(bodyParser.urlencoded({extended: true}))
+
   })
 })
 
