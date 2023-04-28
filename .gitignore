@@ -13,3 +13,5 @@ work/
 
 # hidden definitions
 .env
+
+.vscode
