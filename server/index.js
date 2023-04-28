@@ -21,7 +21,7 @@ const db = mysql.createPool({
 
 app.get("/", (req, res) => {
   // DB Query
-  const sqlInsertItem = "INSERT INTO store_products (product_name, description, price, quantity) VALUES ('Chanel Bag', 'A very expensive leather bag.', 1250.00, 1);"
+  const sqlInsertItem = "INSERT INTO store_products (nome, descricao, preco, data_criacao) VALUES ('Chanel Bag', 'A very expensive leather bag.', 1250.00, '2023-04-28');"
   db.query(sqlInsertItem, (err, result) => {
     res.send(result)
   })
