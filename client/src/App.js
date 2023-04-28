@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import Axios from "axios"
+import axios from "axios"
 
 // Stylesheet
 import "./App.css"
@@ -11,7 +11,7 @@ function App() {
   const [productDescription, setProductDescription] = useState("")
   const [productPrice, setProductPrice] = useState(0)
 
-  // Current date in MySQL date format
+  // Current date in MySQL date format: YYYY-MM-DD
   function getCurrentDate() {
     const today = new Date();
     const year = today.getFullYear();
@@ -23,8 +23,22 @@ function App() {
   const addProduct = (event) => {
     // prevent the form from reloading the page when it's submitted
     event.preventDefault()
-    // POST request from Axios - sending information into the backend
-    
+
+    // Send a POST request to the backend server using axios, passing in the form data.
+    const baseURL = "http://localhost:3001"
+    const insertURL = "/api/insert"
+    // Pass in the product name, description, price, creation date, and update date.
+    axios.post(baseURL+insertURL, {
+      productName: productName,
+      productDescription: productDescription,
+      productPrice: productPrice,
+      creationDate: getCurrentDate(),
+      updateDate: getCurrentDate()
+    }).then(() => {
+      console.log("Product successfully inserted into the database.")
+    }).catch(error => {
+      console.error("Error inserting product:", error)
+    })
   }
 
   return (
