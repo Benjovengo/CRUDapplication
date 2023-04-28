@@ -28,6 +28,19 @@ app.use(express.json())
 // Body Parser
 app.use(bodyParser.urlencoded({extended: true}))
 
+// Handle an HTTP GET request to extract information from the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.get("/api/get", (req, res) => {
+  // Select all information from the store_products SQL table
+  const sqlSelectStatement = "SELECT * FROM store_products;"
+  // Execute the SELECT statement to return all information from the store_products SQL table
+  db.query(sqlSelectStatement, (err, result) => {
+    res.send(result)
+  })
+})
+
+
 // Handle an HTTP POST request to insert information into the database
 // req: represents the request data received from the front-end
 // res: represents the response data to be sent back to the front-end
