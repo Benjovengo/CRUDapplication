@@ -20,7 +20,7 @@ function App () {
     axios.get(baseURL + getURL).then((response) => {
       setProductsList(response.data)
     })
-  }, [])
+  }, [productsList])
 
   // Current date in MySQL date format: YYYY-MM-DD
   function getCurrentDate () {
@@ -38,17 +38,18 @@ function App () {
     // Send a POST request to the backend server using axios, passing in the form data.
     const baseURL = 'http://localhost:3001'
     const insertURL = '/api/insert'
+    const getURL = '/api/get'
     // Pass in the product name, description, price, creation date, and update date.
     axios.post(baseURL + insertURL, {
-      productName,
-      productDescription,
-      productPrice,
+      productName: productName,
+      productDescription: productDescription,
+      productPrice: productPrice,
       creationDate: getCurrentDate(),
       updateDate: getCurrentDate()
-    }).then(() => {
-      console.log('Product successfully inserted into the database.')
-    }).catch(error => {
-      console.error('Error inserting product:', error)
+    })
+    // Send a GET request to the backend server to retrieve product data.
+    axios.get(baseURL + getURL).then((response) => {
+      setProductsList(response.data)
     })
   }
 
