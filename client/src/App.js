@@ -31,6 +31,7 @@ function App () {
     return `${year}-${month}-${day}`
   }
 
+
   const addProduct = (event) => {
     // prevent the form from reloading the page when it's submitted
     event.preventDefault()
@@ -52,6 +53,22 @@ function App () {
       setProductsList(response.data)
     })
   }
+
+
+  // Deletes a product from the database with the provided product ID, and updates the state of the component with the latest product data.
+  // @param {string} productID - The ID of the product to be deleted.
+  const deleteProduct = (productID) => {
+    // Send a POST request to delete a product from the database
+    axios.delete(`http://localhost:3001/api/delete/${productID}`)
+    // Send a POST request to the backend server using axios, passing in the form data.
+    const baseURL = 'http://localhost:3001'
+    const getURL = '/api/get'
+    // Send a GET request to the backend server to retrieve product data.
+    axios.get(baseURL + getURL).then((response) => {
+      setProductsList(response.data)
+    })
+  }
+
 
   return (
     <div className='App'>
@@ -81,7 +98,7 @@ function App () {
             <p>Insert date: {singleProduct.data_criacao}</p>
             <p>Update date: {singleProduct.data_atualizacao}</p>
 
-            <button>Delete</button>
+            <button onClick={() => {deleteProduct(singleProduct.id)}}>Delete</button>
             <button>Update</button>
             
           </div>
