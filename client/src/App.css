@@ -1,0 +1,20 @@
+.App {
+  text-align: center;
+}
+
+.form__wrapper form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form__wrapper input {
+  margin: 10px;
+}
+
+.productCard {
+  background-color: blanchedalmond;
+  margin: 2em;
+  padding: 1em;
+}
