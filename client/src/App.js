@@ -11,6 +11,11 @@ function App () {
   const [productPrice, setProductPrice] = useState(0)
   const [productsList, setProductsList] = useState([])
 
+  // Hooks for updating product information
+  const [newProductName, setNewProductName] = useState('')
+  const [newProductDescription, setNewProductDescription] = useState('')
+  const [newProductPrice, setNewProductPrice] = useState(0)
+
   // Fetch the products from the database when the page loads
   useEffect(() => {
     // Address of the backend server
@@ -75,6 +80,35 @@ function App () {
   }
 
 
+  // Updates the information of a product in the database with the provided
+  // new information and usee the product ID to differentiate the rows, and
+  // updates the state of the component with the latest product data.
+  //
+  // @param {int} productID - The ID of the product to be deleted.
+  const updateProduct = (productID) => {
+    // Send a POST request to delete a product from the database
+    axios.put('http://localhost:3001/api/update/', {
+      productID: productID,
+      productName: newProductName,
+      productDescription: newProductDescription,
+      productPrice: newProductPrice,
+      updateDate: getCurrentDate()
+    })
+    // clear the new hooks
+    setNewProductName('')
+    setNewProductDescription('')
+    setNewProductPrice('')
+    // Send a POST request to the backend server using axios, passing in the
+    // form data.
+    const baseURL = 'http://localhost:3001'
+    const getURL = '/api/get'
+    // Send a GET request to the backend server to retrieve product data.
+    axios.get(baseURL + getURL).then((response) => {
+      setProductsList(response.data)
+    })
+  }
+
+
   return (
     <div className='App'>
       <h1>Insert Product</h1>
@@ -104,7 +138,14 @@ function App () {
             <p>Update date: {singleProduct.data_atualizacao}</p>
 
             <button onClick={() => {deleteProduct(singleProduct.id)}}>Delete</button>
-            <button>Update</button>
+            
+            <form onSubmit={() => {updateProduct(singleProduct.id)}}>
+              <input id='product-new-name' name='product-new-name' type='text' onChange={(e) => {setNewProductName(e.target.value)}} required />
+              <textarea id='product-new-description' name='product-new-description' maxLength='500' onChange={(e) => { setNewProductDescription(e.target.value) }} />
+              <input id='new-price' name='new-price' type='number' step='0.01' min='0' max='9999999.99' onChange={(e) => {setNewProductPrice(e.target.value)}} required />
+              <button type='submit'>Update</button>
+            </form>
+            
             
           </div>
         )
