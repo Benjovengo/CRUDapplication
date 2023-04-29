@@ -74,12 +74,16 @@ function App () {
 
       {productsList.map((singleProduct) => {
         return (
-          <div key={singleProduct.id}>
+          <div className='productCard' key={singleProduct.id}>
             <p>Product name: {singleProduct.nome}</p>
             <p>Product description: {singleProduct.descricao}</p>
             <p>Price: {singleProduct.preco}</p>
             <p>Insert date: {singleProduct.data_criacao}</p>
-            <p>Update date: {singleProduct.data_atualizacao}</p> <br />
+            <p>Update date: {singleProduct.data_atualizacao}</p>
+
+            <button>Delete</button>
+            <button>Update</button>
+            
           </div>
         )
       })}

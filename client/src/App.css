@@ -12,3 +12,9 @@
 .form__wrapper input {
   margin: 10px;
 }
+
+.productCard {
+  background-color: blanchedalmond;
+  margin: 2em;
+  padding: 1em;
+}
