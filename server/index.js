@@ -5,6 +5,15 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
+
+// CORS module to enable communication between the front-end and back-end servers
+app.use(cors())
+// grab the information as a JSON object from the front-end
+app.use(express.json())
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: true }))
+
+
 // Creates a MySQL connection pool using the mysql library.
 //
 // The pool is configured with the following settings:
@@ -21,12 +30,6 @@ const db = mysql.createPool({
   database: 'ChallengeDB'
 })
 
-// CORS module to enable communication between the front-end and back-end servers
-app.use(cors())
-// grab the information as a JSON object from the front-end
-app.use(express.json())
-// Body Parser
-app.use(bodyParser.urlencoded({ extended: true }))
 
 // Handle an HTTP GET request to extract information from the database
 // req: represents the request data received from the front-end
@@ -39,6 +42,7 @@ app.get('/api/get', (req, res) => {
     res.send(result)
   })
 })
+
 
 // Handle an HTTP POST request to insert information into the database
 // req: represents the request data received from the front-end
@@ -59,6 +63,7 @@ app.post('/api/insert', (req, res) => {
     console.log(err)
   })
 })
+
 
 app.listen(3001, () => {
   console.log('Server running on port 3001.')
