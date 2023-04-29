@@ -81,6 +81,27 @@ app.post('/api/insert', (req, res) => {
 })
 
 
+// Handle an HTTP PUT request to update information in the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.put('/api/update', (req, res) => {
+  // Fetch the ID of the product to be deleted
+  const id = req.body.productID
+  // Extract the fields from the request body sent by the front-end
+  const productName = req.body.productName // limit: 200 chars
+  const productDescription = req.body.productDescription // limit: 500 chars
+  const productPrice = req.body.productPrice // limit: decimal(10,2)
+  const updateDate = req.body.updateDate // should be in YYYY-MM-DD format
+  // Select all information from the store_products SQL table
+  const sqlUpdateStatement = 'UPDATE store_products SET nome = ?, descricao = ?, preco = ?, data_atualizacao = ? WHERE id = ?;'
+  // Execute the SELECT statement to return all information from the
+  // store_products SQL table
+  db.query(sqlUpdateStatement, [productName, productDescription, productPrice, updateDate, id], (err, result) => {
+    if (err) console.log(err)
+  })
+})
+
+
 app.listen(3001, () => {
   console.log('Server running on port 3001.')
 })
