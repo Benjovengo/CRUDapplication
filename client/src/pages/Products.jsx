@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
+import './Stylesheet.css'
+
 const Products = () => {
   // Hooks for the product information
   const [productName, setProductName] = useState('')
