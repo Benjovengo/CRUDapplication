@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
+import SingleProductCard from '../components/cards/SingleProductCard'
+
 import './Stylesheet.css'
 
 const Products = () => {
@@ -126,7 +128,12 @@ const Products = () => {
         </form>
       </div>
 
-      {productsList.map((singleProduct) => {
+      {productsList.map((singleProduct) => (
+          <SingleProductCard key={singleProduct.id} item={singleProduct} />
+        )
+      )}
+
+      {/* productsList.map((singleProduct) => {
         return (
           <div className='productCard' key={singleProduct.id}>
             <p>Product name: {singleProduct.nome}</p>
@@ -147,7 +154,7 @@ const Products = () => {
             
           </div>
         )
-      })}
+      }) */}
     </div>
   )
 }
