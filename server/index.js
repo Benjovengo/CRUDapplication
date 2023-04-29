@@ -69,6 +69,30 @@ app.get('/api/get', (req, res) => {
 })
 
 
+// endpoint to get a specific product by id
+// Handle an HTTP GET request to extract information from the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.get('/api/get/:productID', (req, res) => {
+  // Fetch the ID of the product to be deleted
+  const id = req.params.productID
+  // Select all information from the store_products SQL table
+  const sqlSelectStatement = 'SELECT * FROM store_products WHERE id = ?;'
+  // Execute the SELECT statement to return all information from the
+  // store_products SQL table
+  db.query(sqlSelectStatement, (err, result) => {
+    // Error handling
+    if (err) {
+      res.status(500).json({ error: 'Error fetching product from database' });
+    } else if (result.length === 0) {
+      res.status(404).json({ error: 'Product not found' });
+    } else {
+      // Successful GET request
+      res.send(result)
+    }
+  })
+})
+
 // endpoint to create a new product
 // Handle an HTTP POST request to insert information into the database
 // req: represents the request data received from the front-end
