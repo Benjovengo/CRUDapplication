@@ -31,6 +31,21 @@ const db = mysql.createPool({
 })
 
 
+// Handle an HTTP DELETE request to extract information from the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.delete('/api/delete/:productID', (req, res) => {
+  // Fetch the ID of the product to be deleted
+  const id = req.params.productID
+  // Select all information from the store_products SQL table
+  const sqlDeleteStatement = 'DELETE FROM store_products WHERE id = ?;'
+  // Execute the SELECT statement to return all information from the store_products SQL table
+  db.query(sqlDeleteStatement, id, (err, result) => {
+    if (err) console.log(err)
+  })
+})
+
+
 // Handle an HTTP GET request to extract information from the database
 // req: represents the request data received from the front-end
 // res: represents the response data to be sent back to the front-end
