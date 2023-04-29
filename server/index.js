@@ -31,6 +31,7 @@ const db = mysql.createPool({
 })
 
 
+// endpoint to delete an existing product by id
 // Handle an HTTP DELETE request to extract information from the database
 // req: represents the request data received from the front-end
 // res: represents the response data to be sent back to the front-end
@@ -47,6 +48,7 @@ app.delete('/api/delete/:productID', (req, res) => {
 })
 
 
+// endpoint to get all products
 // Handle an HTTP GET request to extract information from the database
 // req: represents the request data received from the front-end
 // res: represents the response data to be sent back to the front-end
@@ -56,11 +58,18 @@ app.get('/api/get', (req, res) => {
   // Execute the SELECT statement to return all information from the
   // store_products SQL table
   db.query(sqlSelectStatement, (err, result) => {
+    // Error handling
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Error fetching products!');
+    }
+    // Successful GET request
     res.send(result)
   })
 })
 
 
+// endpoint to create a new product
 // Handle an HTTP POST request to insert information into the database
 // req: represents the request data received from the front-end
 // res: represents the response data to be sent back to the front-end
@@ -76,11 +85,15 @@ app.post('/api/insert', (req, res) => {
   // Execute the INSERT statement with the extracted field values
   db.query(sqlInsertStatement, [productName, productDescription, productPrice, creationDate, null], (err, result) => {
     // Handle any errors that occurred during the query execution
-    console.log(err)
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Error creating product!');
+    }
   })
 })
 
 
+// endpoint to update an existing product by id
 // Handle an HTTP PUT request to update information in the database
 // req: represents the request data received from the front-end
 // res: represents the response data to be sent back to the front-end
@@ -97,7 +110,14 @@ app.put('/api/update', (req, res) => {
   // Execute the SELECT statement to return all information from the
   // store_products SQL table
   db.query(sqlUpdateStatement, [productName, productDescription, productPrice, updateDate, id], (err, result) => {
-    if (err) console.log(err)
+    // Error handling
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Error updating product!');
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).send('Product not found!');
+    }
   })
 })
 
