@@ -26,8 +26,8 @@ function App () {
   function getCurrentDate () {
     const today = new Date()
     const year = today.getFullYear()
-    const month = ('0' + (today.getMonth() + 1)).slice(-2) // add leading zero if necessary
-    const day = ('0' + today.getDate()).slice(-2) // add leading zero if necessary
+    const month = ('0' + (today.getMonth() + 1)).slice(-2) // add leading zero
+    const day = ('0' + today.getDate()).slice(-2) // add leading zero
     return `${year}-${month}-${day}`
   }
 
@@ -36,11 +36,13 @@ function App () {
     // prevent the form from reloading the page when it's submitted
     event.preventDefault()
 
-    // Send a POST request to the backend server using axios, passing in the form data.
+    // Send a POST request to the backend server using axios, passing in the
+    // form data.
     const baseURL = 'http://localhost:3001'
     const insertURL = '/api/insert'
     const getURL = '/api/get'
-    // Pass in the product name, description, price, creation date, and update date.
+    // Pass in the product name, description, price, creation date, and update
+    // date.
     axios.post(baseURL + insertURL, {
       productName: productName,
       productDescription: productDescription,
@@ -55,12 +57,15 @@ function App () {
   }
 
 
-  // Deletes a product from the database with the provided product ID, and updates the state of the component with the latest product data.
+  // Deletes a product from the database with the provided product ID, and
+  // updates the state of the component with the latest product data.
+  //
   // @param {string} productID - The ID of the product to be deleted.
   const deleteProduct = (productID) => {
     // Send a POST request to delete a product from the database
     axios.delete(`http://localhost:3001/api/delete/${productID}`)
-    // Send a POST request to the backend server using axios, passing in the form data.
+    // Send a POST request to the backend server using axios, passing in the
+    // form data.
     const baseURL = 'http://localhost:3001'
     const getURL = '/api/get'
     // Send a GET request to the backend server to retrieve product data.

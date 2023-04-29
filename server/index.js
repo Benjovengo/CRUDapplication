@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 
-// CORS module to enable communication between the front-end and back-end servers
+// CORS module to enable communication between the front-end and back-end server
 app.use(cors())
 // grab the information as a JSON object from the front-end
 app.use(express.json())
@@ -39,7 +39,8 @@ app.delete('/api/delete/:productID', (req, res) => {
   const id = req.params.productID
   // Select all information from the store_products SQL table
   const sqlDeleteStatement = 'DELETE FROM store_products WHERE id = ?;'
-  // Execute the SELECT statement to return all information from the store_products SQL table
+  // Execute the SELECT statement to return all information from the
+  // store_products SQL table
   db.query(sqlDeleteStatement, id, (err, result) => {
     if (err) console.log(err)
   })
@@ -52,7 +53,8 @@ app.delete('/api/delete/:productID', (req, res) => {
 app.get('/api/get', (req, res) => {
   // Select all information from the store_products SQL table
   const sqlSelectStatement = 'SELECT * FROM store_products;'
-  // Execute the SELECT statement to return all information from the store_products SQL table
+  // Execute the SELECT statement to return all information from the
+  // store_products SQL table
   db.query(sqlSelectStatement, (err, result) => {
     res.send(result)
   })
