@@ -5,16 +5,14 @@ import axios from 'axios'
 import './Cards.css'
 
 const SingleProductCard = (props) => {
-
   // Extract all the fields from the argument passed by the map function
-  const {id, nome, descricao, preco, data_criacao, data_atualizacao} = props.item
+  const { id, nome, descricao, preco, data_criacao, data_atualizacao } = props.item
   // Hooks for the overlay
-  const [overlayVisible, setOverlayVisible] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(false)
   // Hooks for updating product information
   const [newProductName, setNewProductName] = useState('')
   const [newProductDescription, setNewProductDescription] = useState('')
   const [newProductPrice, setNewProductPrice] = useState(0)
-
 
   const displayOverlay = () => {
     setOverlayVisible(true)
@@ -22,7 +20,6 @@ const SingleProductCard = (props) => {
     setNewProductDescription(descricao)
     setNewProductPrice(preco)
   }
-
 
   // Deletes a product from the database with the provided product ID, and
   // updates the state of the component with the latest product data.
@@ -33,7 +30,6 @@ const SingleProductCard = (props) => {
     axios.delete(`http://localhost:3001/api/delete/${productID}`)
   }
 
-
   // Current date in MySQL date format: YYYY-MM-DD
   const getCurrentDate = () => {
     const today = new Date()
@@ -43,7 +39,6 @@ const SingleProductCard = (props) => {
     return `${year}-${month}-${day}`
   }
 
-
   // Updates the information of a product in the database with the provided
   // new information and usee the product ID to differentiate the rows, and
   // updates the state of the component with the latest product data.
@@ -52,7 +47,7 @@ const SingleProductCard = (props) => {
   const updateProduct = (productID) => {
     // Send a POST request to delete a product from the database
     axios.put('http://localhost:3001/api/update/', {
-      productID: productID,
+      productID,
       productName: newProductName,
       productDescription: newProductDescription,
       productPrice: newProductPrice,
@@ -65,16 +60,15 @@ const SingleProductCard = (props) => {
     setOverlayVisible(false)
   }
 
-
   return (
-    <div className="single__product__card">
+    <div className='single__product__card'>
       <button onClick={displayOverlay}>
         <p>Product Name</p>
         <h2>{nome}</h2>
       </button>
       {overlayVisible && (
-        <div className="overlay">
-          <div className="overlay__content">
+        <div className='overlay'>
+          <div className='overlay__content'>
             <h1>Product Information</h1>
             <h4>{nome}</h4>
             <p>Insert date: {data_criacao}</p>
@@ -83,14 +77,13 @@ const SingleProductCard = (props) => {
               <input id='product-new-name' name='product-new-name' type='text' defaultValue={nome} onChange={(e) => { setNewProductName(e.target.value) }} required />
               <textarea id='product-new-description' name='product-new-description' maxLength='500' defaultValue={descricao} onChange={(e) => { setNewProductDescription(e.target.value) }} />
               <input id='new-price' name='new-price' type='number' step='0.01' min='0' max='9999999.99' defaultValue={preco} onChange={(e) => { setNewProductPrice(e.target.value) }} required />
-              <button onClick={() => {updateProduct(id)}}>Update</button>
+              <button onClick={() => { updateProduct(id) }}>Update</button>
             </div>
-            <button onClick={() => {setOverlayVisible(false)}}>Cancel</button>
-            <button onClick={() => {deleteProduct(id)}}>Delete</button>
+            <button onClick={() => { setOverlayVisible(false) }}>Cancel</button>
+            <button onClick={() => { deleteProduct(id) }}>Delete</button>
           </div>
         </div>
       )}
-      
     </div>
   )
 }

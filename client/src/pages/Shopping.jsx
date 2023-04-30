@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
+// Import card to display the information of a sale
 import SingleSaleCard from '../components/cards/SingleSaleCard'
 
 import './Stylesheet.css'
-
 
 const Shopping = () => {
   // Hooks for the sales information
@@ -12,7 +11,6 @@ const Shopping = () => {
   const [paymentType, setPaymentType] = useState('')
   const [status, setStatus] = useState('')
   const [salesList, setSalesList] = useState([])
-
 
   // Fetch the sales data from the database when the page loads or the sales
   // list changes
@@ -24,7 +22,6 @@ const Shopping = () => {
       setSalesList(response.data)
     })
   }, [salesList])
-
 
   // Current date in MySQL date format: YYYY-MM-DD
   function getCurrentDate () {
@@ -48,10 +45,10 @@ const Shopping = () => {
     // Pass in the product name, description, price, creation date, and update
     // date.
     axios.post(registerSaleURL, {
-      totalPrice: totalPrice,
+      totalPrice,
       creationDate: getCurrentDate(),
-      paymentType: paymentType,
-      status: status
+      paymentType,
+      status
     })
     // Send a GET request to the backend server to retrieve all the sales.
     const getAllSalesURL = 'http://localhost:3001/api/shopping/get'
@@ -60,11 +57,9 @@ const Shopping = () => {
     })
   }
 
-
   return (
     <div className='App'>
       <h1>Shopping History</h1>
-
       <div className='form__wrapper'>
         <form onSubmit={registerSale}>
           <label htmlFor='total-amount'>Total amount:</label>
@@ -78,8 +73,8 @@ const Shopping = () => {
       </div>
 
       {salesList.map((singleProduct) => (
-          <SingleSaleCard key={singleProduct.id} item={singleProduct} />
-        )
+        <SingleSaleCard key={singleProduct.id} item={singleProduct} />
+      )
       )}
     </div>
   )

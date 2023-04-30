@@ -1,8 +1,6 @@
-import React from "react";
-
-import Routers from "../routes/Routers";
-import Header from "./Header";
-
+import React from 'react'
+import Routers from '../routes/Routers'
+import Header from './Header'
 
 const Layout = () => {
   return (
@@ -12,7 +10,7 @@ const Layout = () => {
         <Routers />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

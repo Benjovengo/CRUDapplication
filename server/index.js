@@ -5,14 +5,12 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-
 // CORS module to enable communication between the front-end and back-end server
 app.use(cors())
 // grab the information as a JSON object from the front-end
 app.use(express.json())
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }))
-
 
 // Creates a MySQL connection pool using the mysql library.
 //
@@ -22,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //   - user: The username to authenticate with the database server.
 //   - password: The password to use for the authentication.
 //   - database: The name of the database to use.
-// 
+//
 // The password used in the database is put here in plain text because it is
 // NOT a production code. The intention is to make the code easy to run on other
 // machines and requiring less configuration steps to do so.
@@ -34,26 +32,24 @@ const db = mysql.createPool({
   database: 'ChallengeDB'
 })
 
-
 // Establish connection to the database
 db.getConnection((err, connection) => {
   if (err) {
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      console.error('Database connection was closed.');
+      console.error('Database connection was closed.')
     }
     if (err.code === 'ER_CON_COUNT_ERROR') {
-      console.error('Database has too many connections.');
+      console.error('Database has too many connections.')
     }
     if (err.code === 'ECONNREFUSED') {
-      console.error('Database connection was refused.');
+      console.error('Database connection was refused.')
     }
-    console.error('Error connecting to database:', err);
-    return;
+    console.error('Error connecting to database:', err)
+    return
   }
-  console.log('Database connection established.');
-  connection.release();
+  console.log('Database connection established.')
+  connection.release()
 })
-
 
 // Endpoints to the Products Database
 //
@@ -69,7 +65,6 @@ db.getConnection((err, connection) => {
 // - POST /api/insert: Creates a new product entry in the database
 // - PUT /api/update: Updates product data for a specific product ID
 // - DELETE /api/delete:saleID: Deletes product data for a specific product ID
-
 
 // endpoint to delete an existing product by id
 // Handle an HTTP DELETE request to extract information from the database
@@ -87,7 +82,6 @@ app.delete('/api/delete/:productID', (req, res) => {
   })
 })
 
-
 // endpoint to get all products
 // Handle an HTTP GET request to extract information from the database
 // req: represents the request data received from the front-end
@@ -100,14 +94,13 @@ app.get('/api/get', (req, res) => {
   db.query(sqlSelectStatement, (err, result) => {
     // Error handling
     if (err) {
-      console.log(err);
-      return res.status(500).send('Error fetching products!');
+      console.log(err)
+      return res.status(500).send('Error fetching products!')
     }
     // Successful GET request
     res.send(result)
   })
 })
-
 
 // endpoint to get a specific product by id
 // Handle an HTTP GET request to extract information from the database
@@ -121,12 +114,12 @@ app.get('/api/get/:productID', (req, res) => {
   const sqlSelectStatement = 'SELECT * FROM store_products WHERE id = ?;'
   // Execute the SELECT statement to return all information from the
   // store_products SQL table
-  db.query(sqlSelectStatement, (err, result) => {
+  db.query(sqlSelectStatement, id, (err, result) => {
     // Error handling
     if (err) {
-      res.status(500).json({ error: 'Error fetching product from database' });
+      res.status(500).json({ error: 'Error fetching product from database' })
     } else if (result.length === 0) {
-      res.status(404).json({ error: 'Product not found' });
+      res.status(404).json({ error: 'Product not found' })
     } else {
       // Successful GET request
       res.send(result)
@@ -156,7 +149,7 @@ app.post('/api/insert', (req, res) => {
     preco, \
     data_criacao, \
     data_atualizacao \
-    ) VALUES (?, ?, ?, ?, ?);'
+    ) VALUES (?, ?, ?, ?, ?)'
   // Execute the INSERT statement with the extracted field values
   db.query(sqlInsertStatement, [
     productName,
@@ -167,12 +160,11 @@ app.post('/api/insert', (req, res) => {
   ], (err, result) => {
     // Handle any errors that occurred during the query execution
     if (err) {
-      console.log(err);
-      return res.status(500).send('Error creating product!');
+      console.log(err)
+      return res.status(500).send('Error creating product!')
     }
   })
 })
-
 
 // endpoint to update an existing product by id
 // Handle an HTTP PUT request to update information in the database
@@ -208,15 +200,14 @@ app.put('/api/update', (req, res) => {
   ], (err, result) => {
     // Error handling
     if (err) {
-      console.log(err);
-      return res.status(500).send('Error updating product!');
+      console.log(err)
+      return res.status(500).send('Error updating product!')
     }
     if (result.affectedRows === 0) {
-      return res.status(404).send('Product not found!');
+      return res.status(404).send('Product not found!')
     }
   })
 })
-
 
 // Endpoints to the Shopping History
 //
@@ -231,9 +222,8 @@ app.put('/api/update', (req, res) => {
 // - GET /api/shopping/get:saleID: Retrieves sales data for a specific sale ID
 // - POST /api/shopping/insert: Creates a new sale entry in the database
 // - PUT /api/shopping/update: Updates sales data for a specific sale ID
-// - DELETE /api/shopping/delete:saleID: Deletes sales data for a specific sale 
+// - DELETE /api/shopping/delete:saleID: Deletes sales data for a specific sale
 //   ID
-
 
 // endpoint to delete an existing shopping history entry by id
 // Handle an HTTP DELETE request to extract information from the database
@@ -251,7 +241,6 @@ app.delete('/api/shopping/delete/:saleID', (req, res) => {
   })
 })
 
-
 // endpoint to get all shopping history entries
 // Handle an HTTP GET request to extract information from the database
 // req: represents the request data received from the front-end
@@ -264,14 +253,13 @@ app.get('/api/shopping/get', (req, res) => {
   db.query(sqlSelectStatement, (err, result) => {
     // Error handling
     if (err) {
-      console.log(err);
-      return res.status(500).send('Error fetching sales!');
+      console.log(err)
+      return res.status(500).send('Error fetching sales!')
     }
     // Successful GET request
     res.send(result)
   })
 })
-
 
 // endpoint to get a specific shopping history entry by id
 // Handle an HTTP GET request to extract information from the database
@@ -285,19 +273,18 @@ app.get('/api/shopping/get/:saleID', (req, res) => {
   const sqlSelectStatement = 'SELECT * FROM shopping_history WHERE id = ?;'
   // Execute the SELECT statement to return all information from the
   // shopping_history SQL table
-  db.query(sqlSelectStatement, (err, result) => {
+  db.query(sqlSelectStatement, id, (err, result) => {
     // Error handling
     if (err) {
-      res.status(500).json({ error: 'Error fetching sale from database' });
+      res.status(500).json({ error: 'Error fetching sale from database' })
     } else if (result.length === 0) {
-      res.status(404).json({ error: 'Sale not found' });
+      res.status(404).json({ error: 'Sale not found' })
     } else {
       // Successful GET request
       res.send(result)
     }
   })
 })
-
 
 // endpoint to create a new sale in the shopping history
 // Handle an HTTP POST request to insert information into the database
@@ -313,7 +300,7 @@ app.post('/api/shopping/insert', (req, res) => {
   const paymentType = (req.body.paymentType).substring(0, 200)
   // limit the status to 250 chars
   const status = (req.body.status).substring(0, 250)
-  
+
   // Prepare an SQL INSERT statement with placeholders for the fields
   const sqlInsertStatement = 'INSERT INTO shopping_history (\
     total, \
@@ -330,12 +317,11 @@ app.post('/api/shopping/insert', (req, res) => {
   ], (err, result) => {
     // Handle any errors that occurred during the query execution
     if (err) {
-      console.log(err);
-      return res.status(500).send('Error adding shopping history entry!');
+      console.log(err)
+      return res.status(500).send('Error adding shopping history entry!')
     }
   })
 })
-
 
 // endpoint to update an existing sale entry by id
 // Handle an HTTP PUT request to update information in the database
@@ -371,15 +357,14 @@ app.put('/api/shopping/update', (req, res) => {
   ], (err, result) => {
     // Error handling
     if (err) {
-      console.log(err);
-      return res.status(500).send('Error updating sale!');
+      console.log(err)
+      return res.status(500).send('Error updating sale!')
     }
     if (result.affectedRows === 0) {
-      return res.status(404).send('Sale not found!');
+      return res.status(404).send('Sale not found!')
     }
   })
 })
-
 
 app.listen(3001, () => {
   console.log('Server running on port 3001.')

@@ -12,7 +12,6 @@ const Products = () => {
   const [productPrice, setProductPrice] = useState(0)
   const [productsList, setProductsList] = useState([])
 
-
   // Fetch the products from the database when the page loads
   useEffect(() => {
     // Address of the backend server
@@ -33,11 +32,9 @@ const Products = () => {
     return `${year}-${month}-${day}`
   }
 
-
   const addProduct = (event) => {
     // prevent the form from reloading the page when it's submitted
     event.preventDefault()
-
     // Send a POST request to the backend server using axios, passing in the
     // form data.
     const baseURL = 'http://localhost:3001'
@@ -46,9 +43,9 @@ const Products = () => {
     // Pass in the product name, description, price, creation date, and update
     // date.
     axios.post(baseURL + insertURL, {
-      productName: productName,
-      productDescription: productDescription,
-      productPrice: productPrice,
+      productName,
+      productDescription,
+      productPrice,
       creationDate: getCurrentDate(),
       updateDate: getCurrentDate()
     })
@@ -57,7 +54,6 @@ const Products = () => {
       setProductsList(response.data)
     })
   }
-
 
   return (
     <div className='App'>
@@ -76,8 +72,8 @@ const Products = () => {
       </div>
 
       {productsList.map((singleProduct) => (
-          <SingleProductCard key={singleProduct.id} item={singleProduct} />
-        )
+        <SingleProductCard key={singleProduct.id} item={singleProduct} />
+      )
       )}
     </div>
   )

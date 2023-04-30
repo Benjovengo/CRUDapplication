@@ -5,16 +5,14 @@ import axios from 'axios'
 import './Cards.css'
 
 const SingleSaleCard = (props) => {
-
   // Extract all the fields from the argument passed by the map function
-  const {id, total, data_criacao, tipo_pagamento, status} = props.item
+  const { id, total, data_criacao, tipo_pagamento, status } = props.item
   // Hooks for the overlay
-  const [overlayVisible, setOverlayVisible] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(false)
   // Hooks for updating product information
   const [newTotalPrice, setNewTotalPrice] = useState(0)
   const [newPaymentType, setNewPaymentType] = useState('')
   const [newStatus, setNewStatus] = useState('')
-
 
   const displayOverlay = () => {
     setOverlayVisible(true)
@@ -22,7 +20,6 @@ const SingleSaleCard = (props) => {
     setNewPaymentType(tipo_pagamento)
     setNewStatus(status)
   }
-
 
   // Deletes a sale information from the database with the provided sale ID, and
   // updates the state of the component with the latest sales data.
@@ -33,7 +30,6 @@ const SingleSaleCard = (props) => {
     axios.delete(`http://localhost:3001/api/shopping/delete/${saleID}`)
   }
 
-
   // Current date in MySQL date format: YYYY-MM-DD
   const getCurrentDate = () => {
     const today = new Date()
@@ -42,7 +38,6 @@ const SingleSaleCard = (props) => {
     const day = ('0' + today.getDate()).slice(-2) // add leading zero
     return `${year}-${month}-${day}`
   }
-
 
   // Updates the information of a sale in the database with the provided
   // new information and use the sale ID to differentiate the rows, and
@@ -63,9 +58,8 @@ const SingleSaleCard = (props) => {
     setOverlayVisible(false)
   }
 
-
   return (
-    <div className="single__product__card">
+    <div className='single__product__card'>
       <button onClick={displayOverlay}>
         <p>Sale Number</p>
         <h2>{id}</h2>
@@ -73,8 +67,8 @@ const SingleSaleCard = (props) => {
         <h2>{total}</h2>
       </button>
       {overlayVisible && (
-        <div className="overlay">
-          <div className="overlay__content">
+        <div className='overlay'>
+          <div className='overlay__content'>
             <h1>Sale Information</h1>
             <h4>Id: {id}</h4>
             <h4>Total: {total}</h4>
@@ -86,14 +80,13 @@ const SingleSaleCard = (props) => {
               <input type='text' id='new-payment-type' name='new-payment-type' maxLength='200' defaultValue={tipo_pagamento} onChange={(e) => { setNewPaymentType(e.target.value) }} required />
               <label htmlFor='new-status'>Status:</label>
               <input type='text' id='new-status' name='new-status' maxLength='250' defaultValue={status} onChange={(e) => { setNewStatus(e.target.value) }} required />
-              <button onClick={() => {updateProduct()}}>Update</button>
+              <button onClick={() => { updateProduct() }}>Update</button>
             </div>
-            <button onClick={() => {setOverlayVisible(false)}}>Cancel</button>
-            <button onClick={() => {deleteProduct(id)}}>Delete</button>
+            <button onClick={() => { setOverlayVisible(false) }}>Cancel</button>
+            <button onClick={() => { deleteProduct(id) }}>Delete</button>
           </div>
         </div>
       )}
-      
     </div>
   )
 }
