@@ -35,7 +35,10 @@ const Shopping = () => {
     return `${year}-${month}-${day}`
   }
 
-
+  // Register a new sale.
+  // Send a POST request to the backend server using axios to register the new
+  // sale, and then send a GET request to retrieve all the sales and update the
+  // sales list in the front-end.
   const registerSale = (event) => {
     // Prevent the form from reloading the page when it's submitted
     event.preventDefault()
