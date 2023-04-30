@@ -142,7 +142,7 @@ app.post('/api/insert', (req, res) => {
   const productDescription = (req.body.productDescription).substring(0, 500)
   const maxNumber = 99999999.99 // max number held by a decimal(10,2) field
   // limit the price to fit in a decimal(10,2) field
-  const productPrice = Math.min(0, Math.max(maxNumber, req.body.productPrice))
+  const productPrice = Math.max(0, Math.min(maxNumber, req.body.productPrice))
   const creationDate = req.body.creationDate // should be in YYYY-MM-DD format
 
   // Prepare an SQL INSERT statement with placeholders for the fields
@@ -184,7 +184,7 @@ app.put('/api/update', (req, res) => {
   const productDescription = (req.body.productDescription).substring(0, 500)
   const maxNumber = 99999999.99 // max number held by a decimal(10,2) field
   // limit the price to fit in a decimal(10,2) field
-  const productPrice = Math.min(0, Math.max(maxNumber, req.body.productPrice))
+  const productPrice = Math.max(0, Math.min(maxNumber, req.body.productPrice))
   const updateDate = req.body.updateDate // should be in YYYY-MM-DD format
   // Select all information from the store_products SQL table
   const sqlUpdateStatement = 'UPDATE store_products SET \
@@ -303,7 +303,7 @@ app.post('/api/shopping/insert', (req, res) => {
   // Extract the fields from the request body sent by the front-end
   const maxNumber = 99999999.99 // max number held by a decimal(10,2) field
   // limit the total price amount to fit in a decimal(10,2) field
-  const totalPrice = Math.min(0, Math.max(maxNumber, req.body.totalPrice))
+  const totalPrice = Math.max(0, Math.min(maxNumber, req.body.totalPrice))
   const creationDate = req.body.creationDate // should be in YYYY-MM-DD format
   // limit the payment type identifier to 200 chars
   const paymentType = (req.body.paymentType).substring(0, 200)
@@ -343,7 +343,7 @@ app.put('/api/shopping/update', (req, res) => {
   // Extract the fields from the request body sent by the front-end
   const maxNumber = 99999999.99 // max number held by a decimal(10,2) field
   // limit the total price amount to fit in a decimal(10,2) field
-  const totalPrice = Math.min(0, Math.max(maxNumber, req.body.totalPrice))
+  const totalPrice = Math.max(0, Math.min(maxNumber, req.body.totalPrice))
   const creationDate = req.body.creationDate // should be in YYYY-MM-DD format
   // limit the payment type identifier to 200 chars
   const paymentType = (req.body.paymentType).substring(0, 200)
