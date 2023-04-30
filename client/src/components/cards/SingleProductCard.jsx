@@ -58,7 +58,6 @@ const SingleProductCard = (props) => {
       productPrice: newProductPrice,
       updateDate: getCurrentDate()
     })
-    console.log(newProductName)
     // clear the new hooks
     setNewProductName('')
     setNewProductDescription('')
