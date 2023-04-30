@@ -147,6 +147,146 @@ app.put('/api/update', (req, res) => {
 })
 
 
+// Endpoints to the Shopping History
+
+// endpoint to delete an existing shopping history entry by id
+// Handle an HTTP DELETE request to extract information from the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.delete('/api/shopping/delete/:saleID', (req, res) => {
+  // Fetch the ID of the sale to be deleted
+  const id = req.params.saleID
+  // Select all information from the shopping_history SQL table
+  const sqlDeleteStatement = 'DELETE FROM shopping_history WHERE id = ?;'
+  // Execute the DELETE statement to remove the information about a shopping
+  // entry from the shopping_history SQL table
+  db.query(sqlDeleteStatement, id, (err, result) => {
+    if (err) console.log(err)
+  })
+})
+
+
+// endpoint to get all shopping history entries
+// Handle an HTTP GET request to extract information from the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.get('/api/shopping/get', (req, res) => {
+  // Select all information from the shopping_history SQL table
+  const sqlSelectStatement = 'SELECT * FROM shopping_history;'
+  // Execute the SELECT statement to return all information from the
+  // shopping_history SQL table
+  db.query(sqlSelectStatement, (err, result) => {
+    // Error handling
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Error fetching sales!');
+    }
+    // Successful GET request
+    res.send(result)
+  })
+})
+
+
+// endpoint to get a specific shopping history entry by id
+// Handle an HTTP GET request to extract information from the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.get('/api/shopping/get/:saleID', (req, res) => {
+  // Fetch the ID of the sale entry to be deleted
+  const id = req.params.saleID
+  // Select the information about a particular sale from the shopping_history
+  // SQL table
+  const sqlSelectStatement = 'SELECT * FROM shopping_history WHERE id = ?;'
+  // Execute the SELECT statement to return all information from the
+  // shopping_history SQL table
+  db.query(sqlSelectStatement, (err, result) => {
+    // Error handling
+    if (err) {
+      res.status(500).json({ error: 'Error fetching sale from database' });
+    } else if (result.length === 0) {
+      res.status(404).json({ error: 'Sale not found' });
+    } else {
+      // Successful GET request
+      res.send(result)
+    }
+  })
+})
+
+
+// endpoint to create a new sale in the shopping history
+// Handle an HTTP POST request to insert information into the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.post('/api/shopping/insert', (req, res) => {
+  // Extract the fields from the request body sent by the front-end
+  const totalPrice = req.body.totalPrice // limit: decimal(10,2)
+  const creationDate = req.body.creationDate // should be in YYYY-MM-DD format
+  const paymentType = req.body.paymentType // limit: 200 chars
+  const status = req.body.status // limit: 250 chars
+  
+  // Prepare an SQL INSERT statement with placeholders for the fields
+  const sqlInsertStatement = 'INSERT INTO store_products (\
+    total, \
+    data_criacao, \
+    tipo_pagamento, \
+    status \
+    ) VALUES (?, ?, ?, ?, ?);'
+  // Execute the INSERT statement with the extracted field values
+  db.query(sqlInsertStatement, [
+    totalPrice,
+    creationDate,
+    paymentType,
+    status
+  ], (err, result) => {
+    // Handle any errors that occurred during the query execution
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Error adding shopping history entry!');
+    }
+  })
+})
+
+
+// endpoint to update an existing sale entry by id
+// Handle an HTTP PUT request to update information in the database
+// req: represents the request data received from the front-end
+// res: represents the response data to be sent back to the front-end
+app.put('/api/shopping/update', (req, res) => {
+  // Fetch the ID of the product to be deleted
+  const id = req.body.saleID
+  // Extract the fields from the request body sent by the front-end
+  const totalPrice = req.body.totalPrice // limit: decimal(10,2)
+  const creationDate = req.body.creationDate // should be in YYYY-MM-DD format
+  const paymentType = req.body.paymentType // limit: 200 chars
+  const status = req.body.status // limit: 250 chars
+  // Select all information from the store_products SQL table
+  const sqlUpdateStatement = 'UPDATE store_products SET \
+  total = ?, \
+  data_criacao = ?, \
+  tipo_pagamento = ?, \
+  status = ? \
+  WHERE id = ?;'
+  // Execute the SELECT statement to return all information from the
+  // store_products SQL table
+  db.query(sqlUpdateStatement, [
+    totalPrice,
+    creationDate,
+    paymentType,
+    status,
+    id
+  ], (err, result) => {
+    // Error handling
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Error updating sale!');
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).send('Sale not found!');
+    }
+  })
+})
+
+
 app.listen(3001, () => {
   console.log('Server running on port 3001.')
 })
