@@ -116,15 +116,31 @@ app.get('/api/get/:productID', (req, res) => {
 // res: represents the response data to be sent back to the front-end
 app.post('/api/insert', (req, res) => {
   // Extract the fields from the request body sent by the front-end
-  const productName = req.body.productName // limit: 200 chars
-  const productDescription = req.body.productDescription // limit: 500 chars
-  const productPrice = req.body.productPrice // limit: decimal(10,2)
+  // limit the name to 200 chars
+  const productName = (req.body.productName).substring(0, 200)
+  // limit the description to 500 chars
+  const productDescription = (req.body.productDescription).substring(0, 500)
+  const maxNumber = 99999999.99 // max number held by a decimal(10,2) field
+  // limit the price to fit in a decimal(10,2) field
+  const productPrice = Math.min(0, Math.max(maxNumber, req.body.productPrice))
   const creationDate = req.body.creationDate // should be in YYYY-MM-DD format
 
   // Prepare an SQL INSERT statement with placeholders for the fields
-  const sqlInsertStatement = 'INSERT INTO store_products (nome, descricao, preco, data_criacao, data_atualizacao) VALUES (?, ?, ?, ?, ?);'
+  const sqlInsertStatement = 'INSERT INTO store_products (\
+    nome, \
+    descricao, \
+    preco, \
+    data_criacao, \
+    data_atualizacao \
+    ) VALUES (?, ?, ?, ?, ?);'
   // Execute the INSERT statement with the extracted field values
-  db.query(sqlInsertStatement, [productName, productDescription, productPrice, creationDate, null], (err, result) => {
+  db.query(sqlInsertStatement, [
+    productName,
+    productDescription,
+    productPrice,
+    creationDate,
+    null
+  ], (err, result) => {
     // Handle any errors that occurred during the query execution
     if (err) {
       console.log(err);
@@ -142,15 +158,30 @@ app.put('/api/update', (req, res) => {
   // Fetch the ID of the product to be deleted
   const id = req.body.productID
   // Extract the fields from the request body sent by the front-end
-  const productName = req.body.productName // limit: 200 chars
-  const productDescription = req.body.productDescription // limit: 500 chars
-  const productPrice = req.body.productPrice // limit: decimal(10,2)
+  // limit the name to 200 chars
+  const productName = (req.body.productName).substring(0, 200)
+  // limit the description to 500 chars
+  const productDescription = (req.body.productDescription).substring(0, 500)
+  const maxNumber = 99999999.99 // max number held by a decimal(10,2) field
+  // limit the price to fit in a decimal(10,2) field
+  const productPrice = Math.min(0, Math.max(maxNumber, req.body.productPrice))
   const updateDate = req.body.updateDate // should be in YYYY-MM-DD format
   // Select all information from the store_products SQL table
-  const sqlUpdateStatement = 'UPDATE store_products SET nome = ?, descricao = ?, preco = ?, data_atualizacao = ? WHERE id = ?;'
+  const sqlUpdateStatement = 'UPDATE store_products SET \
+  nome = ?, \
+  descricao = ?, \
+  preco = ?, \
+  data_atualizacao = ? \
+  WHERE id = ?;'
   // Execute the SELECT statement to return all information from the
   // store_products SQL table
-  db.query(sqlUpdateStatement, [productName, productDescription, productPrice, updateDate, id], (err, result) => {
+  db.query(sqlUpdateStatement, [
+    productName,
+    productDescription,
+    productPrice,
+    updateDate,
+    id
+  ], (err, result) => {
     // Error handling
     if (err) {
       console.log(err);
@@ -250,10 +281,14 @@ app.get('/api/shopping/get/:saleID', (req, res) => {
 // res: represents the response data to be sent back to the front-end
 app.post('/api/shopping/insert', (req, res) => {
   // Extract the fields from the request body sent by the front-end
-  const totalPrice = req.body.totalPrice // limit: decimal(10,2)
+  const maxNumber = 99999999.99 // max number held by a decimal(10,2) field
+  // limit the total price amount to fit in a decimal(10,2) field
+  const totalPrice = Math.min(0, Math.max(maxNumber, req.body.totalPrice))
   const creationDate = req.body.creationDate // should be in YYYY-MM-DD format
-  const paymentType = req.body.paymentType // limit: 200 chars
-  const status = req.body.status // limit: 250 chars
+  // limit the payment type identifier to 200 chars
+  const paymentType = (req.body.paymentType).substring(0, 200)
+  // limit the status to 250 chars
+  const status = (req.body.status).substring(0, 250)
   
   // Prepare an SQL INSERT statement with placeholders for the fields
   const sqlInsertStatement = 'INSERT INTO store_products (\
@@ -286,10 +321,14 @@ app.put('/api/shopping/update', (req, res) => {
   // Fetch the ID of the product to be deleted
   const id = req.body.saleID
   // Extract the fields from the request body sent by the front-end
-  const totalPrice = req.body.totalPrice // limit: decimal(10,2)
+  const maxNumber = 99999999.99 // max number held by a decimal(10,2) field
+  // limit the total price amount to fit in a decimal(10,2) field
+  const totalPrice = Math.min(0, Math.max(maxNumber, req.body.totalPrice))
   const creationDate = req.body.creationDate // should be in YYYY-MM-DD format
-  const paymentType = req.body.paymentType // limit: 200 chars
-  const status = req.body.status // limit: 250 chars
+  // limit the payment type identifier to 200 chars
+  const paymentType = (req.body.paymentType).substring(0, 200)
+  // limit the status to 250 chars
+  const status = (req.body.status).substring(0, 250)
   // Select all information from the store_products SQL table
   const sqlUpdateStatement = 'UPDATE store_products SET \
   total = ?, \
