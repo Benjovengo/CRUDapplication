@@ -311,12 +311,12 @@ app.post('/api/shopping/insert', (req, res) => {
   const status = (req.body.status).substring(0, 250)
   
   // Prepare an SQL INSERT statement with placeholders for the fields
-  const sqlInsertStatement = 'INSERT INTO store_products (\
+  const sqlInsertStatement = 'INSERT INTO shopping_history (\
     total, \
     data_criacao, \
     tipo_pagamento, \
     status \
-    ) VALUES (?, ?, ?, ?, ?);'
+    ) VALUES (?, ?, ?, ?);'
   // Execute the INSERT statement with the extracted field values
   db.query(sqlInsertStatement, [
     totalPrice,
@@ -350,7 +350,7 @@ app.put('/api/shopping/update', (req, res) => {
   // limit the status to 250 chars
   const status = (req.body.status).substring(0, 250)
   // Select all information from the store_products SQL table
-  const sqlUpdateStatement = 'UPDATE store_products SET \
+  const sqlUpdateStatement = 'UPDATE shopping_history SET \
   total = ?, \
   data_criacao = ?, \
   tipo_pagamento = ?, \
