@@ -22,6 +22,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //   - user: The username to authenticate with the database server.
 //   - password: The password to use for the authentication.
 //   - database: The name of the database to use.
+// 
+// The password used in the database is put here in plain text because it is
+// NOT a production code. The intention is to make the code easy to run on other
+// machines and requiring less configuration steps to do so.
 const db = mysql.createPool({
   host: '127.0.0.1',
   port: '33061',
