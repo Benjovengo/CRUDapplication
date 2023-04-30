@@ -31,6 +31,22 @@ const db = mysql.createPool({
 })
 
 
+// Endpoints to the Products Database
+//
+// Add five new REST endpoints to the application, allowing to perform CRUD
+// (Create, Read, Update, Delete) operations on a database for storing
+// information about products. These endpoints are designed to facilitate easy
+// management of products data and provide the ability to manipulate and
+// retrieve information efficiently.
+//
+// The five endpoints are:
+// - GET /api/get: Retrieves all products data
+// - GET /api/get:saleID: Retrieves products data for a specific product ID
+// - POST /api/insert: Creates a new product entry in the database
+// - PUT /api/update: Updates product data for a specific product ID
+// - DELETE /api/delete:saleID: Deletes product data for a specific product ID
+
+
 // endpoint to delete an existing product by id
 // Handle an HTTP DELETE request to extract information from the database
 // req: represents the request data received from the front-end
@@ -148,6 +164,21 @@ app.put('/api/update', (req, res) => {
 
 
 // Endpoints to the Shopping History
+//
+// Add five new REST endpoints to the application, allowing to perform CRUD
+// (Create, Read, Update, Delete) operations on a database for storing shopping
+// history sales data. These endpoints are designed to facilitate easy
+// management of sales data and provide the ability to manipulate and retrieve
+// information efficiently.
+//
+// The five endpoints are:
+// - GET /api/shopping/get: Retrieves all sales data
+// - GET /api/shopping/get:saleID: Retrieves sales data for a specific sale ID
+// - POST /api/shopping/insert: Creates a new sale entry in the database
+// - PUT /api/shopping/update: Updates sales data for a specific sale ID
+// - DELETE /api/shopping/delete:saleID: Deletes sales data for a specific sale 
+//   ID
+
 
 // endpoint to delete an existing shopping history entry by id
 // Handle an HTTP DELETE request to extract information from the database
