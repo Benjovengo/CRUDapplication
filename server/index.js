@@ -40,8 +40,8 @@ app.delete('/api/delete/:productID', (req, res) => {
   const id = req.params.productID
   // Select all information from the store_products SQL table
   const sqlDeleteStatement = 'DELETE FROM store_products WHERE id = ?;'
-  // Execute the SELECT statement to return all information from the
-  // store_products SQL table
+  // Execute the DELETE statement to remove the information about a product from
+  // the store_products SQL table
   db.query(sqlDeleteStatement, id, (err, result) => {
     if (err) console.log(err)
   })
@@ -76,7 +76,8 @@ app.get('/api/get', (req, res) => {
 app.get('/api/get/:productID', (req, res) => {
   // Fetch the ID of the product to be deleted
   const id = req.params.productID
-  // Select all information from the store_products SQL table
+  // Select the information about a particular product from the store_products
+  // SQL table
   const sqlSelectStatement = 'SELECT * FROM store_products WHERE id = ?;'
   // Execute the SELECT statement to return all information from the
   // store_products SQL table
