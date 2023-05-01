@@ -100,6 +100,15 @@ const Shopping = () => {
     return `${year}-${month}-${day}`
   }
 
+  // Return an array of objects containing only the IDs
+  // - takes an array of objects with other fields and returns a new array of
+  //   objects containing only the id field
+  const getIdArray = (productsArray) => {
+    return productsArray.map(obj => {
+      return { id: obj.id }
+    })
+  }
+
   // Register a new sale.
   // Send a POST request to the backend server using axios to register the new
   // sale, and then send a GET request to retrieve all the sales and update the
@@ -117,7 +126,7 @@ const Shopping = () => {
       creationDate: getCurrentDate(),
       paymentType,
       status,
-      productsList
+      productsList: getIdArray(productsList)
     })
     // Send a GET request to the backend server to retrieve all the sales.
     const getAllSalesURL = 'http://localhost:3001/api/shopping/get'

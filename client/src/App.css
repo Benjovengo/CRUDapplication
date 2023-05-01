@@ -27,3 +27,7 @@ body {
   margin: 2em;
   padding: 1em;
 }
+
+button:hover {
+  background-color: #aaa;
+}
