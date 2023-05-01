@@ -24,25 +24,25 @@ const Header = () => {
   const toggleMenu = () => menuRef.current.classList.toggle('active__menu')
 
   return (
-    <header className='header'>
+    <header>
       <Container fluid>
-
-        <div className='nav__menu' ref={menuRef} onClick={toggleMenu}>
-          <ul className='nav__list'>
-            {NAV__LINKS.map((item, index) => (
-              <li className='nav__item' key={index}>
-                <NavLink
-                  to={item.url}
-                  className={(navClass) =>
-                    navClass.isActive ? 'active' : ''}
-                >
-                  {item.display}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+        <div className="header__wrapper">
+          <div className='nav__menu' ref={menuRef} onClick={toggleMenu}>
+            <ul className='nav__list'>
+              {NAV__LINKS.map((item, index) => (
+                <span className='nav__item' key={index}>
+                  <NavLink
+                    to={item.url}
+                    className={(navClass) =>
+                      navClass.isActive ? 'active' : ''}
+                  >
+                    {item.display}
+                  </NavLink>
+                </span>
+              ))}
+            </ul>
+          </div>
         </div>
-
       </Container>
     </header>
   )
