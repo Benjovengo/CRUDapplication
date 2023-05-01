@@ -93,7 +93,7 @@ const SingleProductCard = (props) => {
               </Row>
               <Row>
                 <p className='mt-4'>Insert date: {data_criacao.slice(0, 10)}</p>
-                <p className='mb-4'>Update date: {data_atualizacao.slice(0, 10)}</p>
+                <p className='mb-4'>Update date: {data_atualizacao ? data_atualizacao.slice(0, 10) : ''}</p>
               </Row>
               <Row>
                 <Col>
