@@ -26,7 +26,7 @@ const SingleSaleCard = (props) => {
   // updates the state of the component with the latest sales data.
   //
   // @param {string} saleID - The ID of the sale to be deleted.
-  const deleteProduct = (saleID) => {
+  const deleteSale = (saleID) => {
     // Send a POST request to delete a product from the database
     axios.delete(`http://localhost:3001/api/shopping/delete/${saleID}`)
   }
@@ -43,7 +43,7 @@ const SingleSaleCard = (props) => {
   // Updates the information of a sale in the database with the provided
   // new information and use the sale ID to differentiate the rows, and
   // updates the state of the component with the latest sales data.
-  const updateProduct = () => {
+  const updateSaleInfo = () => {
     // Send a POST request to delete a product from the database
     axios.put('http://localhost:3001/api/shopping/update', {
       totalPrice: newTotalPrice,
@@ -78,18 +78,30 @@ const SingleSaleCard = (props) => {
             <h1>Sale Information</h1>
             <h4>Id: {id}</h4>
             <h4>Total: {total}</h4>
-            <p>Insert date: {data_criacao}</p>
-            <div>
-              <label htmlFor='new-total'>New total amount:</label>
-              <input id='new-total' name='new-total' type='number' step='0.01' min='0' max='9999999.99' defaultValue={total} onChange={(e) => { setNewTotalPrice(e.target.value) }} required />
-              <label htmlFor='new-payment-type'>Payment type:</label>
-              <input type='text' id='new-payment-type' name='new-payment-type' maxLength='200' defaultValue={tipo_pagamento} onChange={(e) => { setNewPaymentType(e.target.value) }} required />
-              <label htmlFor='new-status'>Status:</label>
-              <input type='text' id='new-status' name='new-status' maxLength='250' defaultValue={status} onChange={(e) => { setNewStatus(e.target.value) }} required />
-              <button onClick={() => { updateProduct() }}>Update</button>
+            <p>Insert date: {data_criacao.slice(0,10)}</p>
+            <div className='overlay__update__inputs'>
+              <Row>
+                <label htmlFor='new-total'>New total amount:</label>
+                <input id='new-total' name='new-total' type='number' step='0.01' min='0' max='9999999.99' defaultValue={total} onChange={(e) => { setNewTotalPrice(e.target.value) }} required />
+              </Row>
+              <Row className='mt-3'>
+                <label htmlFor='new-payment-type'>Payment type:</label>
+                <input type='text' id='new-payment-type' name='new-payment-type' maxLength='200' defaultValue={tipo_pagamento} onChange={(e) => { setNewPaymentType(e.target.value) }} required />
+              </Row>
+              <Row className='mt-3'>
+                <label htmlFor='new-status'>Status:</label>
+                <input type='text' id='new-status' name='new-status' maxLength='250' defaultValue={status} onChange={(e) => { setNewStatus(e.target.value) }} required />
+              </Row>
+              <Row>
+                <Col>
+                  <button className='delete__button' onClick={() => { deleteSale(id) }}>Delete Item</button>
+                </Col>
+                <Col>
+                  <button className='update__button' onClick={() => { updateSaleInfo(id) }}>Update Item</button>
+                </Col>
+              </Row>
+              <button className='close__button' onClick={() => { setOverlayVisible(false) }}>Close</button>
             </div>
-            <button onClick={() => { setOverlayVisible(false) }}>Cancel</button>
-            <button onClick={() => { deleteProduct(id) }}>Delete</button>
           </div>
         </div>
       )}
