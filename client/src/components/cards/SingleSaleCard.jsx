@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'reactstrap'
 import axios from 'axios'
 
@@ -14,12 +14,37 @@ const SingleSaleCard = (props) => {
   const [newTotalPrice, setNewTotalPrice] = useState(0)
   const [newPaymentType, setNewPaymentType] = useState('')
   const [newStatus, setNewStatus] = useState('')
+  // Hooks for the product names
+  const [productNames, setProductNames] = useState([])
+
+
+
+  
+  
+
+
 
   const displayOverlay = () => {
     setOverlayVisible(true)
     setNewTotalPrice(total)
     setNewPaymentType(tipo_pagamento)
     setNewStatus(status)
+
+    // Address of the GET endpoint on the backend server
+    const getURL = `http://localhost:3001/api/shopping/get/${id}`
+    // Send a GET request to the backend server to retrieve the products
+    // IDs for a particular sale/purchase.
+    axios.get(getURL).then((response) => {
+      const purchasedIDs = JSON.parse((response.data)[0].product_ids)
+      /* console.log(purchasedIDs) */
+      for (const productSold of purchasedIDs) {
+        // Address of the GET endpoint for the products
+        const productURL = `http://localhost:3001/api/get/${productSold.id}`
+        axios.get(productURL).then((response) => {
+          setProductNames(productNames => [...productNames, (response.data)[0].nome])
+        })
+      }
+    })
   }
 
   // Deletes a sale information from the database with the provided sale ID, and
@@ -76,10 +101,32 @@ const SingleSaleCard = (props) => {
         <div className='overlay'>
           <div className='overlay__content'>
             <h1>Sale Information</h1>
-            <h4>Id: {id}</h4>
-            <h4>Total: {total}</h4>
-            <p>Insert date: {data_criacao.slice(0, 10)}</p>
-            <div className='overlay__update__inputs'>
+
+
+            <div className="purchase__info">
+              <Row>
+                <Col>
+                  <h4>Purchase Id: {id}</h4>
+                </Col>
+                <Col>
+                <h4>Total: ${total}</h4>
+                </Col>
+              </Row>
+
+              <h4>Products</h4>
+              <div className="scrollable__container">
+                {productNames.map((item, index) => (
+                  <div key={index}>
+                    <Row>
+                    </Row>
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+              <p className='mt-2'>Insert date: {data_criacao.slice(0, 10)}</p>
+            </div>
+
+            <div className='overlay__update__inputs mt-2'>
               <Row>
                 <label htmlFor='new-total'>New total amount:</label>
                 <input id='new-total' name='new-total' type='number' step='0.01' min='0' max='9999999.99' defaultValue={total} onChange={(e) => { setNewTotalPrice(e.target.value) }} required />
@@ -88,7 +135,7 @@ const SingleSaleCard = (props) => {
                 <label htmlFor='new-payment-type'>Payment type:</label>
                 <input type='text' id='new-payment-type' name='new-payment-type' maxLength='200' defaultValue={tipo_pagamento} onChange={(e) => { setNewPaymentType(e.target.value) }} required />
               </Row>
-              <Row className='mt-3'>
+              <Row className='mt-3 mb-3'>
                 <label htmlFor='new-status'>Status:</label>
                 <input type='text' id='new-status' name='new-status' maxLength='250' defaultValue={status} onChange={(e) => { setNewStatus(e.target.value) }} required />
               </Row>

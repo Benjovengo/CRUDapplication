@@ -116,3 +116,18 @@
 .overlay__update__inputs .close__button {
   text-align: center;
 }
+
+
+.purchase__info {
+  background-color: #33333385;
+  margin: 0;
+  padding: 1em;
+  width: 100%;
+}
+
+.scrollable__container {
+  background-color: #aaaaaa25;
+  height: 3.5em;
+  overflow-y: scroll; /* Enable vertical scrolling */
+  padding: 0.25em 0.5em;
+}
