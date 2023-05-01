@@ -7,10 +7,11 @@
 }
 
 .product__id {
-  color: #a8a8a8aa;
+  color: #d8d8d8;
   font-family: "Montserrat", sans-serif;
   font-size: 2rem;
   font-weight: 700;
+  text-shadow: -1px -1px 0 #644, 1px -1px 0 #644, -1px 1px 0 #644, 1px 1px 0 #644;
 }
 
 .single__product__card p {
