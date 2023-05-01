@@ -112,10 +112,11 @@ const Shopping = () => {
     // Pass in the product name, description, price, creation date, and update
     // date.
     axios.post(registerSaleURL, {
-      totalAmount,
+      totalPrice: totalAmount,
       creationDate: getCurrentDate(),
       paymentType,
-      status
+      status,
+      productsList
     })
     // Send a GET request to the backend server to retrieve all the sales.
     const getAllSalesURL = 'http://localhost:3001/api/shopping/get'

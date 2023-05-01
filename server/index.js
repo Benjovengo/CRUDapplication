@@ -300,20 +300,23 @@ app.post('/api/shopping/insert', (req, res) => {
   const paymentType = (req.body.paymentType).substring(0, 200)
   // limit the status to 250 chars
   const status = (req.body.status).substring(0, 250)
+  const productsJSONList = JSON.stringify(req.body.productsList)
 
   // Prepare an SQL INSERT statement with placeholders for the fields
   const sqlInsertStatement = 'INSERT INTO shopping_history (\
     total, \
     data_criacao, \
     tipo_pagamento, \
-    status \
-    ) VALUES (?, ?, ?, ?);'
+    status, \
+    product_ids \
+    ) VALUES (?, ?, ?, ?, ?);'
   // Execute the INSERT statement with the extracted field values
   db.query(sqlInsertStatement, [
     totalPrice,
     creationDate,
     paymentType,
-    status
+    status,
+    productsJSONList
   ], (err, result) => {
     // Handle any errors that occurred during the query execution
     if (err) {
@@ -344,7 +347,8 @@ app.put('/api/shopping/update', (req, res) => {
   total = ?, \
   data_criacao = ?, \
   tipo_pagamento = ?, \
-  status = ? \
+  status = ?, \
+  product_ids = ? \
   WHERE id = ?;'
   // Execute the SELECT statement to return all information from the
   // store_products SQL table
@@ -353,6 +357,7 @@ app.put('/api/shopping/update', (req, res) => {
     creationDate,
     paymentType,
     status,
+    null,
     id
   ], (err, result) => {
     // Error handling
