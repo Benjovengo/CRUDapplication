@@ -30,5 +30,6 @@
 }
 
 .active {
-  color: #D87E01 !important;
+  color: #415564 !important;
+  text-decoration: underline !important;
 }

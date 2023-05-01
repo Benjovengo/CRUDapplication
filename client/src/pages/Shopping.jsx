@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'reactstrap'
 import axios from 'axios'
 // Import card to display the information of a sale
 import SingleSaleCard from '../components/cards/SingleSaleCard'
-import productsImage from '../assets/trending-products.webp'
+import productsImage from '../assets/shopping_cart_history.png'
 
 import './Stylesheet.css'
 

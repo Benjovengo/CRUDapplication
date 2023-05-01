@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'reactstrap'
 import axios from 'axios'
 
 import SingleProductCard from '../components/cards/SingleProductCard'
-import productsImage from '../assets/trending-products.webp'
+import productsImage from '../assets/products_hero.png'
 
 import './Stylesheet.css'
 
@@ -56,7 +56,6 @@ const Products = () => {
   }
 
   return (
-
     <>
     <section>
       <Container fluid>
@@ -122,7 +121,6 @@ const Products = () => {
       </Container>
     </section>
     </>
-    
   )
 }
 
