@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import axios from 'axios'
 
 // Stylesheet
