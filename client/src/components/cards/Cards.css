@@ -1,14 +1,40 @@
+.single__product__card {
+  line-height: normal;
+}
+
+.single__product__card button {
+  text-align: left;
+}
+
+.product__id {
+  color: #a8a8a8aa;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.single__product__card p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.single__product__card h4 {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.75);
+  bottom: 0;
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  color: white;
+  left: 0;
+  line-height: normal;
+  position: absolute;
   position: fixed;
+  right: 0;
+  top: 0;
 }

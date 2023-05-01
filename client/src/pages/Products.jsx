@@ -60,66 +60,66 @@ const Products = () => {
     <>
     <section>
       <Container fluid>
-          <div className='app__wrapper'>
-            <Row className="justify-content-center">
-              <Col className='text-center'>
-                <h1>Product Information</h1>
-                <p>Information about the products.</p>
-              </Col>
-            </Row>
+        <div className='app__wrapper'>
 
-            <Row>
-              <Col className="add__product">
-                <h2>Add Product to the Database</h2>
-              </Col>
-            </Row>
-            
-            <Row className='add__products__wrapper'>
-              <Col className='text-center'>
-                  <form className='form__wrapper' onSubmit={addProduct}>
-                    <Row>
-                      <label htmlFor='product-name'>Product Name</label>
-                      <input type='text' id='product-name' name='product-name' maxLength='200' onChange={(e) => { setProductName(e.target.value) }} required />
-                    </Row>
-                    <Row>
-                      <label className='mt-2' htmlFor='product-description'>Product Description:</label>
-                      <textarea id='product-description' name='product-description' maxLength='500' onChange={(e) => { setProductDescription(e.target.value) }} />
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Row>
-                          <label className='mt-2' htmlFor='price'>Price:</label>
-                          <input type='number' id='price' name='price' step='0.01' min='0' max='9999999.99' onChange={(e) => { setProductPrice(e.target.value) }} required />
-                        </Row>
-                      </Col>
-                      <Col>
-                        <button className='mt-2' type='submit'>Add product</button>
-                      </Col>
-                    </Row>
-                  </form>
-              </Col>
-              <Col className='text-center'>
-                <img className='products__image' src={productsImage} alt="" />
-              </Col>
-            </Row>
+          <Row className="justify-content-center">
+            <Col className='text-center'>
+              <h1>Product Information</h1>
+              <p>Information about the products.</p>
+            </Col>
+          </Row>
 
-            <Row className='mt-4'>
-              <Col>
-                <h2>Stored Products - Database</h2>
-              </Col>
-            </Row>
+          <Row>
+            <Col className="add__item">
+              <h2>Add a new product to the database</h2>
+            </Col>
+          </Row>
+          
+          <Row className='add__items__wrapper align-items-center'>
+            <Col className='text-center'>
+                <form className='form__wrapper' onSubmit={addProduct}>
+                  <Row>
+                    <label htmlFor='product-name'>Product Name</label>
+                    <input type='text' id='product-name' name='product-name' maxLength='200' onChange={(e) => { setProductName(e.target.value) }} required />
+                  </Row>
+                  <Row>
+                    <label className='mt-2' htmlFor='product-description'>Product Description:</label>
+                    <textarea id='product-description' name='product-description' maxLength='500' onChange={(e) => { setProductDescription(e.target.value) }} />
+                  </Row>
+                  <Row className='align-items-end mt-2'>
+                    <Col>
+                      <Row>
+                        <label htmlFor='price'>Price:</label>
+                        <input type='number' id='price' name='price' step='0.01' min='0' max='9999999.99' onChange={(e) => { setProductPrice(e.target.value) }} required />
+                      </Row>
+                    </Col>
+                    <Col>
+                      <button type='submit'>Add product</button>
+                    </Col>
+                  </Row>
+                </form>
+            </Col>
+            <Col className='text-center'>
+              <img className='products__image' src={productsImage} alt="" />
+            </Col>
+          </Row>
 
-            <Row>
-              <div className="products__list">
-                {productsList.map((singleProduct) => (
-                  <SingleProductCard key={singleProduct.id} item={singleProduct} />
-                )
-                )}
-              </div>
-            </Row>
-            
-          </div>
-        </Container>
+          <Row className='mt-4'>
+            <Col>
+              <h2>Stored Products - Database</h2>
+            </Col>
+          </Row>
+
+          <Row>
+            <div className="list__database__items">
+              {productsList.map((singleProduct) => (
+                <SingleProductCard key={singleProduct.id} item={singleProduct} />
+              ))}
+            </div>
+          </Row>
+          
+        </div>
+      </Container>
     </section>
     </>
     

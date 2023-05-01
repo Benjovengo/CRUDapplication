@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Container, Row, Col } from 'reactstrap'
 import axios from 'axios'
 // Import card to display the information of a sale
 import SingleSaleCard from '../components/cards/SingleSaleCard'
+import productsImage from '../assets/trending-products.webp'
 
 import './Stylesheet.css'
 
@@ -126,33 +128,73 @@ const Shopping = () => {
   }
 
   return (
-    <div className='App'>
-      <h1>Shopping History</h1>
-      <div className='form__wrapper'>
-        <form onSubmit={registerSale}>
+    <>
+    <section>
+      <Container fluid>
+        <div className='app__wrapper'>
+          
+          <Row className="justify-content-center">
+            <Col className='text-center'>
+              <h1>Sales Information</h1>
+              <p>Information about the sales.</p>
+            </Col>
+          </Row>
 
-          <div id='total-checked'></div>
+          <Row>
+            <Col className="add__item">
+              <h2>Add a new sale to the database</h2>
+            </Col>
+          </Row>
 
-          <fieldset>
-            <legend>Select products:</legend>
-            <div id="products"></div>
-          </fieldset>
+          <Row className='add__items__wrapper align-items-center'>
+            <Col className='text-center'>
+              <form className='form__wrapper' onSubmit={registerSale}>
+                <fieldset className='text-start'>
+                  <legend>Select products:</legend>
+                  <div id="products"></div>
+                </fieldset>
+                <label htmlFor='total-amount'>Total amount:</label>
+                <div>$<span id='total-checked'></span></div>
+                
+                <Row>
+                  <label htmlFor='payment-type'>Payment type:</label>
+                  <input type='text' id='payment-type' name='payment-type' maxLength='200' onChange={(e) => { setPaymentType(e.target.value) }} required />
+                </Row>
+                <Row>
+                  <label htmlFor='status'>Status:</label>
+                  <input type='text' id='status' name='status' maxLength='250' onChange={(e) => { setStatus(e.target.value) }} required />
+                </Row>
+                <Row className='mt-4'>
+                  <button type='submit'>Store new sale</button>
+                </Row>
+              </form>
 
-          <label htmlFor='total-amount'>Total amount:</label>
-          {/* <input type='number' id='total-amount' name='total-amount' step='0.01' min='0' max='9999999.99' onChange={(e) => { setTotalPrice(e.target.value) }} required /> */}
-          <label htmlFor='payment-type'>Payment type:</label>
-          <input type='text' id='payment-type' name='payment-type' maxLength='200' onChange={(e) => { setPaymentType(e.target.value) }} required />
-          <label htmlFor='status'>Status:</label>
-          <input type='text' id='status' name='status' maxLength='250' onChange={(e) => { setStatus(e.target.value) }} required />
-          <button type='submit'>Submit</button>
-        </form>
-      </div>
+            </Col>
+            <Col className='text-center'>
+              <img className='products__image' src={productsImage} alt="" />
+            </Col>
+          </Row>
 
-      {salesList.map((singleProduct) => (
-        <SingleSaleCard key={singleProduct.id} item={singleProduct} />
-      )
-      )}
-    </div>
+          <Row className='mt-4'>
+            <Col>
+              <h2>Sales Database</h2>
+            </Col>
+          </Row>
+
+
+          <Row>
+            <div className="list__database__items">
+            {salesList.map((singleProduct) => (
+              <SingleSaleCard key={singleProduct.id} item={singleProduct} />
+            ))}
+            </div>
+          </Row>
+
+        </div>
+      </Container>
+    </section>
+    </>
+    
   )
 }
 

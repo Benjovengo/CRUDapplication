@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Row, Col } from 'reactstrap'
 import axios from 'axios'
 
 // Stylesheet
@@ -61,10 +62,15 @@ const SingleSaleCard = (props) => {
   return (
     <div className='single__product__card'>
       <button onClick={displayOverlay}>
-        <p>Sale Number</p>
-        <h2>{id}</h2>
-        <p>Sale Total</p>
-        <h2>{total}</h2>
+      <Row className="align-items-center">
+          <Col className="col-2 ml-auto text-center product__id">
+            {id}
+          </Col>
+          <Col>
+            <p>Sale Total</p>
+            <h4>${total}</h4>
+          </Col>
+        </Row>
       </button>
       {overlayVisible && (
         <div className='overlay'>
