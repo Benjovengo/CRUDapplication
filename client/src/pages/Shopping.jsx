@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 // Import card to display the information of a sale
 import SingleSaleCard from '../components/cards/SingleSaleCard'
@@ -12,6 +12,8 @@ const Shopping = () => {
   const [status, setStatus] = useState('')
   const [salesList, setSalesList] = useState([])
   const [productsList, setProductsList] = useState([])
+  const [shoppingItemsList, setShoppingItemsList] = useState([])
+  const shoppingItemsListRef = useRef(shoppingItemsList)
 
   // Fetch the sales data from the database when the page loads or the sales
   // list changes
@@ -67,10 +69,13 @@ const Shopping = () => {
         const amount = document.getElementById('total-checked').innerText
         if (checkbox.checked) {
           // push item ID to an array
+          setShoppingItemsList(shoppingItemsList => [... shoppingItemsList, product.id])
           // add the value of the item to the total amount
           setTotalAmount(Number(amount) + product.preco)
         } else {
           // pop the item ID from the array
+          setShoppingItemsList(shoppingItemsList => [... shoppingItemsList].filter((id) => id !== product.id))
+          // const newItemsList = (shoppingItemsListRef.current).filter((number) => number !== product.id)
           // subtract the value of the item from the total amount
           setTotalAmount(Number(amount) - product.preco)
         }
