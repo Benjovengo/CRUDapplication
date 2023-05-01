@@ -25,7 +25,7 @@
 
 .overlay {
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.85);
   bottom: 0;
   color: white;
   display: flex;
@@ -37,4 +37,81 @@
   position: fixed;
   right: 0;
   top: 0;
+}
+
+.overlay__content {
+  width: 60%
+}
+
+.overlay__update__inputs label {
+  font-size: small;
+  margin: 0;
+  padding: 0;
+}
+
+.overlay__update__inputs input[type="text"] {
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #ccc !important;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+.overlay__update__inputs input[type="text"]:hover {
+  background-color: #a0a0a025;
+}
+
+.overlay__update__inputs textarea {
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #ccc !important;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.15rem;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+.overlay__update__inputs textarea:hover {
+  background-color: #a0a0a025;
+}
+
+.overlay__update__inputs input[type="number"] {
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #ccc !important;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.15rem;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+.overlay__update__inputs input[type="number"]:hover {
+  background-color: #a0a0a025;
+}
+
+.overlay__update__inputs .delete__button {
+  background-color: #500;
+  border: 1px solid #722 !important;
+  color: white;
+  text-align: center;
+}
+
+.overlay__update__inputs .delete__button:hover {
+  background-color: #300;
+}
+
+.overlay__update__inputs .update__button {
+  text-align: center;
+}
+
+.overlay__update__inputs .close__button {
+  text-align: center;
 }

@@ -52,11 +52,13 @@
 
 .list__database__items button {
   background-color: #eee;
-  border: none;
-  outline: none;
   padding: 7px 25px !important;
   border-radius: 0 !important;
   border: 1px solid #ccc !important;
   margin: 0.125em 0.5em;
   width: 100%;
+}
+
+.list__database__items button:hover {
+  background-color: #aaa;
 }
