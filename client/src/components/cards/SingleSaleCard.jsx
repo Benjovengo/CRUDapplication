@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Row, Col } from 'reactstrap'
 import axios from 'axios'
 
@@ -16,13 +16,6 @@ const SingleSaleCard = (props) => {
   const [newStatus, setNewStatus] = useState('')
   // Hooks for the product names
   const [productNames, setProductNames] = useState([])
-
-
-
-  
-  
-
-
 
   const displayOverlay = () => {
     setOverlayVisible(true)
@@ -102,23 +95,20 @@ const SingleSaleCard = (props) => {
           <div className='overlay__content'>
             <h1>Sale Information</h1>
 
-
-            <div className="purchase__info">
+            <div className='purchase__info'>
               <Row>
                 <Col>
                   <h4>Purchase Id: {id}</h4>
                 </Col>
                 <Col>
-                <h4>Total: ${total}</h4>
+                  <h4>Total: ${total}</h4>
                 </Col>
               </Row>
 
               <h4>Products</h4>
-              <div className="scrollable__container">
+              <div className='scrollable__container'>
                 {productNames.map((item, index) => (
                   <div key={index}>
-                    <Row>
-                    </Row>
                     <p>{item}</p>
                   </div>
                 ))}

@@ -105,8 +105,8 @@ const Shopping = () => {
   //   objects containing only the id field
   const getIdArray = (productsArray) => {
     return productsArray.map(obj => {
-      return { id: obj.id };
-    });
+      return { id: obj.id }
+    })
   }
 
   // Register a new sale.
