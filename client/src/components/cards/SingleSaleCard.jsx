@@ -62,8 +62,8 @@ const SingleSaleCard = (props) => {
   return (
     <div className='single__product__card'>
       <button onClick={displayOverlay}>
-      <Row className="align-items-center">
-          <Col className="col-2 ml-auto text-center product__id">
+        <Row className='align-items-center'>
+          <Col className='col-2 ml-auto text-center product__id'>
             {id}
           </Col>
           <Col>
@@ -78,7 +78,7 @@ const SingleSaleCard = (props) => {
             <h1>Sale Information</h1>
             <h4>Id: {id}</h4>
             <h4>Total: {total}</h4>
-            <p>Insert date: {data_criacao.slice(0,10)}</p>
+            <p>Insert date: {data_criacao.slice(0, 10)}</p>
             <div className='overlay__update__inputs'>
               <Row>
                 <label htmlFor='new-total'>New total amount:</label>

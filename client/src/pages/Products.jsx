@@ -57,25 +57,24 @@ const Products = () => {
 
   return (
     <>
-    <section>
-      <Container fluid>
-        <div className='app__wrapper'>
+      <section>
+        <Container fluid>
+          <div className='app__wrapper'>
 
-          <Row className="justify-content-center">
-            <Col className='text-center'>
-              <h1>Product Information</h1>
-              <p>Information about the products.</p>
-            </Col>
-          </Row>
+            <Row className='justify-content-center'>
+              <Col className='text-center'>
+                <h1>Product Information</h1>
+                <p>Information about the products.</p>
+              </Col>
+            </Row>
 
-          <Row>
-            <Col className="add__item">
-              <h2>Add a new product to the database</h2>
-            </Col>
-          </Row>
-          
-          <Row className='add__items__wrapper align-items-center'>
-            <Col className='text-center'>
+            <Row>
+              <Col className='add__item'>
+                <h2>Add a new product to the database</h2>
+              </Col>
+            </Row>
+            <Row className='add__items__wrapper align-items-center'>
+              <Col className='text-center'>
                 <form className='form__wrapper' onSubmit={addProduct}>
                   <Row>
                     <label htmlFor='product-name'>Product Name</label>
@@ -97,29 +96,26 @@ const Products = () => {
                     </Col>
                   </Row>
                 </form>
-            </Col>
-            <Col className='text-center'>
-              <img className='products__image' src={productsImage} alt="" />
-            </Col>
-          </Row>
-
-          <Row className='mt-4'>
-            <Col>
-              <h2>Stored Products - Database</h2>
-            </Col>
-          </Row>
-
-          <Row>
-            <div className="list__database__items">
-              {productsList.map((singleProduct) => (
-                <SingleProductCard key={singleProduct.id} item={singleProduct} />
-              ))}
-            </div>
-          </Row>
-          
-        </div>
-      </Container>
-    </section>
+              </Col>
+              <Col className='text-center'>
+                <img className='products__image' src={productsImage} alt='' />
+              </Col>
+            </Row>
+            <Row className='mt-4'>
+              <Col>
+                <h2>Stored Products - Database</h2>
+              </Col>
+            </Row>
+            <Row>
+              <div className='list__database__items'>
+                {productsList.map((singleProduct) => (
+                  <SingleProductCard key={singleProduct.id} item={singleProduct} />
+                ))}
+              </div>
+            </Row>
+          </div>
+        </Container>
+      </section>
     </>
   )
 }

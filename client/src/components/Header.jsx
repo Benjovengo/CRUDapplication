@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header>
       <Container fluid>
-        <div className="header__wrapper">
+        <div className='header__wrapper'>
           <div className='nav__menu' ref={menuRef} onClick={toggleMenu}>
             <ul className='nav__list'>
               {NAV__LINKS.map((item, index) => (

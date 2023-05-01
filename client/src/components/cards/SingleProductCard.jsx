@@ -64,8 +64,8 @@ const SingleProductCard = (props) => {
   return (
     <div className='single__product__card'>
       <button onClick={displayOverlay}>
-        <Row className="align-items-center">
-          <Col className="col-2 ml-auto text-center product__id">
+        <Row className='align-items-center'>
+          <Col className='col-2 ml-auto text-center product__id'>
             {id}
           </Col>
           <Col>
@@ -78,28 +78,23 @@ const SingleProductCard = (props) => {
         <div className='overlay'>
           <div className='overlay__content'>
             <h1>Product Information</h1>
-            {/* <h4>{nome}</h4>
-            <p>Insert date: {data_criacao}</p>
-            <p>Update date: {data_atualizacao}</p> */}
             <div className='overlay__update__inputs'>
               <Row>
-                <label htmlFor="product-new-name">Product Name</label>
+                <label htmlFor='product-new-name'>Product Name</label>
                 <input id='product-new-name' name='product-new-name' type='text' defaultValue={nome} onChange={(e) => { setNewProductName(e.target.value) }} required />
               </Row>
               <Row className='mt-3'>
-                <label htmlFor="product-new-description">Product Description</label>
+                <label htmlFor='product-new-description'>Product Description</label>
                 <textarea id='product-new-description' name='product-new-description' maxLength='500' defaultValue={descricao} onChange={(e) => { setNewProductDescription(e.target.value) }} />
               </Row>
               <Row className='mt-3'>
-                <label htmlFor="new-price">Price</label>
+                <label htmlFor='new-price'>Price</label>
                 <input id='new-price' name='new-price' type='number' step='0.01' min='0' max='9999999.99' defaultValue={preco} onChange={(e) => { setNewProductPrice(e.target.value) }} required />
               </Row>
-              
               <Row>
-                <p className='mt-4'>Insert date: {data_criacao.slice(0,10)}</p>
-                <p className='mb-4'>Update date: {data_atualizacao.slice(0,10)}</p>
+                <p className='mt-4'>Insert date: {data_criacao.slice(0, 10)}</p>
+                <p className='mb-4'>Update date: {data_atualizacao.slice(0, 10)}</p>
               </Row>
-              
               <Row>
                 <Col>
                   <button className='delete__button' onClick={() => { deleteProduct(id) }}>Delete Item</button>
@@ -108,9 +103,7 @@ const SingleProductCard = (props) => {
                   <button className='update__button' onClick={() => { updateProduct(id) }}>Update Item</button>
                 </Col>
               </Row>
-              
               <button className='close__button' onClick={() => { setOverlayVisible(false) }}>Close</button>
-              
             </div>
           </div>
         </div>
