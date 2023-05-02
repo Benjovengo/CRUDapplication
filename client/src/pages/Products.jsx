@@ -88,7 +88,7 @@ const Products = () => {
             <Row className='add__items__wrapper align-items-center'>
               <Col className='text-center'>
                 <form className='form__wrapper' onSubmit={addProduct}>
-                  <div className="form__contents">
+                  <div className='form__contents'>
                     <Row>
                       <label htmlFor='product-name'>Product Name</label>
                       <input type='text' id='product-name' name='product-name' maxLength='200' onChange={(e) => { setProductName(e.target.value) }} required />

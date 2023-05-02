@@ -149,7 +149,7 @@ const Shopping = () => {
             <Row className='add__items__wrapper align-items-center'>
               <Col className='text-start'>
                 <form className='form__wrapper' onSubmit={registerSale}>
-                  <div className="form__contents">
+                  <div className='form__contents'>
                     <fieldset className='text-start'>
                       <legend>Registered Products</legend>
                       <div className='database__products' id='products' />
