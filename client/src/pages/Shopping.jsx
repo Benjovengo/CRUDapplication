@@ -102,9 +102,10 @@ const Shopping = () => {
   // - takes an array of objects with other fields and returns a new array of
   //   objects containing only the id field
   const getIdArray = (productsArray) => {
-    return productsArray.map(obj => {
-      return { id: obj.id }
+    const objArr = productsArray.map((num) => {
+      return { id: num }
     })
+    return objArr
   }
 
   // Register a new sale.
@@ -124,7 +125,7 @@ const Shopping = () => {
       creationDate: getCurrentDate(),
       paymentType,
       status,
-      productsList: getIdArray(productsList)
+      productsList: getIdArray(shoppingItemsList)
     })
     // Send a GET request to the backend server to retrieve all the sales.
     const getAllSalesURL = 'http://localhost:3001/api/shopping/get'
