@@ -85,12 +85,6 @@ const Products = () => {
                 <p>Information about the products.</p>
               </Col>
             </Row>
-
-            <Row>
-              <Col className='add__item'>
-                <h2>Add a new product to the database</h2>
-              </Col>
-            </Row>
             <Row className='add__items__wrapper align-items-center'>
               <Col className='text-center'>
                 <form className='form__wrapper' onSubmit={addProduct}>

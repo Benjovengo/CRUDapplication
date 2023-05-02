@@ -145,13 +145,6 @@ const Shopping = () => {
                 <p>Information about the sales.</p>
               </Col>
             </Row>
-
-            <Row>
-              <Col className='add__item'>
-                <h2>Add a new sale to the database</h2>
-              </Col>
-            </Row>
-
             <Row className='add__items__wrapper align-items-center'>
               <Col className='text-start'>
                 <form className='form__wrapper' onSubmit={registerSale}>
