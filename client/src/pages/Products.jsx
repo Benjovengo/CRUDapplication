@@ -17,9 +17,9 @@ const Products = () => {
   // Fetch the products from the database when the page loads
   useEffect(() => {
     // Address of the GET endpoint on the backend server
-    const getURL = 'http://localhost:3001/api/get'
+    const getRequestURL = 'http://localhost:3001/api/get'
     // Send a GET request to the backend server to retrieve product data.
-    axios.get(getURL).then((response) => {
+    axios.get(getRequestURL).then((response) => {
       setProductsList(response.data)
     })
   }, [productsList])
@@ -33,24 +33,42 @@ const Products = () => {
     return `${year}-${month}-${day}`
   }
 
+  // Add a new product record to the database
+  //
+  // This function sends a POST request to the server-side to store a new
+  // product in the database using Axios library in JavaScript. After adding
+  // a new product, a GET request is emitted to retrieve the updated list of
+  // products stored in the database.
+  // 
+  // - The postRequestURL and getRequestURL hold the endpoints for the
+  //   respective GET and POST requests.
+  // 
+  // In the POST request, the form data is passed to the server including the
+  // information about the product.
+  // The GET request is used to retrieve data from the server. The response data
+  //  can be used as per the requirement of the project.
   const addProduct = (event) => {
     // prevent the form from reloading the page when it's submitted
     event.preventDefault()
+    // Endpoint URLs for POST and GET requests
+    const postRequestURL = 'http://localhost:3001/api/insert'
+    const getRequestURL = 'http://localhost:3001/api/get'
     // Send a POST request to the backend server using axios, passing in the
-    // form data.
-    const insertURL = 'http://localhost:3001/api/insert'
-    const getURL = 'http://localhost:3001/api/get'
-    // Pass in the product name, description, price, creation date, and update
-    // date.
-    axios.post(insertURL, {
+    // form data including:
+    // - productName: the name of the product (limit: 200 chars)
+    // - productDescription: the description of the products (limit: 500 chars)
+    // - productPrice: the price (limit: 99999999.99)
+    // - creationDate: the date of inclusion of the product (format: YYY-MM-DD)
+    // - updateDate: date of update (null because it's just included)
+    axios.post(postRequestURL, {
       productName,
       productDescription,
       productPrice,
       creationDate: getCurrentDate(),
-      updateDate: getCurrentDate()
+      updateDate: null
     })
     // Send a GET request to the backend server to retrieve product data.
-    axios.get(getURL).then((response) => {
+    axios.get(getRequestURL).then((response) => {
       setProductsList(response.data)
     })
   }
