@@ -14,15 +14,11 @@
 }
 
 .add__items__wrapper {
-  background: linear-gradient(to bottom, rgb(221, 225, 229), rgb(171, 174, 178));
+  background: rgb(235, 236, 238);
 }
 
 .form__wrapper {
   background-color: transparent;
-  width: 100%;
-}
-
-.form__wrapper {
   padding: 1em 2em;
   width: 100%;
 }
@@ -33,15 +29,51 @@
 }
 
 .form__wrapper input[type="text"] {
+  border: 1px solid #ccc;
   margin: 0;
-  padding: 0 0.25em;
+  padding: 0.5 0.25em;
 }
 
 .form__wrapper textarea {
+  border: 1px solid #ccc;
   margin: 0;
   padding: 0 0.25em;
 }
 
+.form__wrapper input[type="number"] {
+  border: 1px solid #ccc;
+  margin: 0;
+  padding: 0.5 0.25em;
+}
+
+.form__contents {
+  background-color: #e4e4e4;
+  border: 1px solid #ccc;
+  box-shadow: 3px 3px #cccccc88;
+  padding: 1.5em;
+}
+
+.form__contents button {
+  background-color: #73c0f4;
+  border: 1px solid #ccc;
+  padding: 0.5em 2em;
+  transition: 0.3s;
+  width: fit-content;
+}
+
+.form__contents button:hover {
+  background-color: #4e83a7;
+  color: white
+}
+
+.form__contents legend {
+  font-family: "Montserrat", sans-serif;
+}
+
+.database__products input[type="checkbox"] {
+  margin: 0 10px 0 0;
+  padding: 0;
+}
 
 .products__image {
   margin-left: auto;

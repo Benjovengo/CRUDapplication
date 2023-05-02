@@ -153,27 +153,30 @@ const Shopping = () => {
             </Row>
 
             <Row className='add__items__wrapper align-items-center'>
-              <Col className='text-center'>
+              <Col className='text-start'>
                 <form className='form__wrapper' onSubmit={registerSale}>
-                  <fieldset className='text-start'>
-                    <legend>Select products:</legend>
-                    <div id='products' />
-                  </fieldset>
-                  <label htmlFor='total-amount'>Total amount:</label>
-                  <div>$<span id='total-checked' /></div>
-                  <Row>
-                    <label htmlFor='payment-type'>Payment type:</label>
-                    <input type='text' id='payment-type' name='payment-type' maxLength='200' onChange={(e) => { setPaymentType(e.target.value) }} required />
-                  </Row>
-                  <Row>
-                    <label htmlFor='status'>Status:</label>
-                    <input type='text' id='status' name='status' maxLength='250' onChange={(e) => { setStatus(e.target.value) }} required />
-                  </Row>
-                  <Row className='mt-4'>
-                    <button type='submit'>Store new sale</button>
-                  </Row>
+                  <div className="form__contents">
+                    <fieldset className='text-start'>
+                      <legend>Registered Products</legend>
+                      <div className='database__products' id='products' />
+                    </fieldset>
+                    <Row className='mt-3'>
+                      <label htmlFor='total-amount'>Total amount</label>
+                      <div>$<span id='total-checked' /></div>
+                    </Row>
+                    <Row className='mt-2'>
+                      <label htmlFor='payment-type'>Payment type</label>
+                      <input type='text' id='payment-type' name='payment-type' maxLength='200' onChange={(e) => { setPaymentType(e.target.value) }} required />
+                    </Row>
+                    <Row className='mt-1'>
+                      <label htmlFor='status'>Status:</label>
+                      <input type='text' id='status' name='status' maxLength='250' onChange={(e) => { setStatus(e.target.value) }} required />
+                    </Row>
+                    <Row className='mt-4'>
+                      <button type='submit'>Store new sale</button>
+                    </Row>
+                  </div>
                 </form>
-
               </Col>
               <Col className='text-center'>
                 <img className='products__image' src={productsImage} alt='' />
