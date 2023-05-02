@@ -44,16 +44,24 @@ npm install
 
 1. Start MySQL server.
 
-Before running the app, you need to set up the MySQL database. The database is called 'ChallengeDB' and it has two tables: `store_products` and `shopping_history`. Use the following commands to create the tables:
+Run the command `sudo service mysql start`
+
+Before running the app, you need to set up the MySQL database. Make sure MySQL server is running, enter the command `sudo mysql -u root -p` and enter the following command to create a new schema:
+
+```sql
+CREATE SCHEMA `ChallengeDB`;
+```
+
+The database is called `ChallengeDB` and now you need to create two tables: `store_products` and `shopping_history`. Inside MySQL command prompt use the following commands to create the tables:
 
 ```sql
 CREATE TABLE `ChallengeDB`.`shopping_history` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(200) NOT NULL,
-  `descricao` VARCHAR(200) NULL,
-  `preco` DECIMAL(10,2) NOT NULL,
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `total` DECIMAL(10,2) NULL,
   `data_criacao` DATE NULL,
-  `data_atualizacao` DATE NULL,
+  `tipo_pagamento` VARCHAR(200) NULL,
+  `status` VARCHAR(250) NULL,
+  `product_ids` JSON NULL,
   PRIMARY KEY (`id`));
 ```
 
@@ -126,3 +134,12 @@ Apart from the modules required by a React.js app, I decided to use others in or
 #### Nodemon
 
 - The nodemon module is a tool that helps develop Node.js based applications by automatically restarting the Node.js application when file changes in the directory are detected. The main reason for using this module is to automate the development process and increase productivity by avoiding the need to manually restart the server after making changes to the code.
+
+
+## Implementation Disclaimer
+
+The implementation of this repository is not optimized by any means. Due to time constraints, I focused on developing a proof-of-concept for the back-end, the database, and the front-end. Please note that this is not production-ready code and requires significant optimization before deployment.
+
+However, this repo provides a solid foundation for integrating different parts of the project. The commits for this proof-of-concept will help the teams responsible for the back-end, the database, and the front-end to develop more features and fix bugs.
+
+Please keep in mind that there is still a long way to go before this project can be considered production-ready. Nonetheless, this repo can serve as a starting point for the team to build upon and develop a more robust solution.
