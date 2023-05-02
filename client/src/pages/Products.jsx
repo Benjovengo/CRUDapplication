@@ -39,10 +39,10 @@ const Products = () => {
   // product in the database using Axios library in JavaScript. After adding
   // a new product, a GET request is emitted to retrieve the updated list of
   // products stored in the database.
-  // 
+  //
   // - The postRequestURL and getRequestURL hold the endpoints for the
   //   respective GET and POST requests.
-  // 
+  //
   // In the POST request, the form data is passed to the server including the
   // information about the product.
   // The GET request is used to retrieve data from the server. The response data

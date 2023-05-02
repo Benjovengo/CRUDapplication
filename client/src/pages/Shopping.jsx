@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import axios from 'axios'
 // Import card to display the information of a sale
@@ -15,7 +15,6 @@ const Shopping = () => {
   const [salesList, setSalesList] = useState([])
   const [productsList, setProductsList] = useState([])
   const [shoppingItemsList, setShoppingItemsList] = useState([])
-  const shoppingItemsListRef = useRef(shoppingItemsList)
 
   // Fetch the sales data from the database when the page loads or the sales
   // list changes
@@ -76,7 +75,6 @@ const Shopping = () => {
         } else {
           // pop the item ID from the array
           setShoppingItemsList(shoppingItemsList => [...shoppingItemsList].filter((id) => id !== product.id))
-          // const newItemsList = (shoppingItemsListRef.current).filter((number) => number !== product.id)
           // subtract the value of the item from the total amount
           setTotalAmount(Number(amount) - product.preco)
         }
